@@ -62,7 +62,7 @@ class UserController extends AbstractActionController
                 // Get filtered and validated data
                 $data = $form->getData();
                 
-                //ajotuer la vérification de l'email dans la bdd pour ne pas avoir de doublon
+                //Ajouter la vérification de l'email dans la bdd pour ne pas avoir de doublon
                 
                 // Add user.
                 $user = $this->addUser($data);
