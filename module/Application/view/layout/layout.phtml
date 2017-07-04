@@ -13,38 +13,48 @@
         <!-- Le styles -->
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
-            ->prependStylesheet($this->basePath('css/bulma.css'))
-            ->prependStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+            ->prependStylesheet($this->basePath('css/uikit-rtl.min.css'))
+            ->prependStylesheet($this->basePath('css/uikit.min.css'))
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
-            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ->prependFile($this->basePath('js/uikit-icons.min.js'))
+        ->prependFile($this->basePath('js/uikit.min.js'))
+        ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
         ?>
     </head>
-    <body class="layout-default">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav-brand"><a class="nav-item" href="<?= $this->url('home') ?>">Wikitema</a></div>
-                <div class="nav-left">
-                    <a class="nav-item is-tab is-active" href="<?= $this->url('home') ?>">Accueil</a>
-                </div>
-                <div class="nav-right">
-                    <a class="nav-item is-tab" href="<?= $this->url('home') ?>">Se connecter</a>
-                </div>
-            </nav>
-        </div>
+    <body>
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li><a class="uk-navbar-item uk-logo" href="#">Wikitema</a></li>
+                    <li class="uk-active"><a href="<?= $this->url('home') ?>">Accueil</a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <div class="uk-navbar-item">
+                        <form class="uk-search uk-search-default">
+                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <input class="uk-search-input" type="search" placeholder="Recherche...">
+                        </form>
+                    </div>
+                    <li><a class="uk-navbar-item" href="#">Se connecter</a></li>
+                </ul>
+            </div>
+        </nav>
         <hr>
-        <section class="section">
-            <div class="container">
+        <section class="uk-section">
+            <div class="uk-container">
                 <?= $this->content ?>
             </div>
         </section>
-        <footer class="footer">
-            <div class="container">
-                <div class="content has-text-centered">
+        <footer class="uk-modal-footer">
+            <div class="uk-container">
+                <div class="content">
                     <p>&copy; <?= date('Y') ?> by Axel Bolo, Bastien Koson, Alexandre Moreau & Vissarut Ly.</p>
-                    <p><a class="icon" href="https://github.com/Lyrut/wikitema" target="_blank"><i class="fa fa-github"></i></a></p>
+                    <p><a class="uk-icon-button" href="https://github.com/Lyrut/wikitema" target="_blank" uk-icon="icon: github"></a></p>
                 </div>
             </div>
         </footer>
