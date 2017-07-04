@@ -34,12 +34,12 @@ return [
                     ],
                 ],
             ],
-            'articles' => [
+            'article' => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/articles',
+                    'route'    => '/article',
                     'defaults' => [
-                        'controller' => Controller\ArticlesController::class,
+                        'controller' => Controller\ArticleController::class,
                         'action'     => 'view',
                     ],
                 ],
@@ -59,7 +59,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\ArticlesController::class => InvokableFactory::class,
+            Controller\ArticleController::class => InvokableFactory::class,
             Controller\UserController::class => InvokableFactory::class,
         ],
     ],
