@@ -44,7 +44,7 @@ return [
                     ],
                 ],
             ],
-            'users' => [
+            'connexion' => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/connexion',
