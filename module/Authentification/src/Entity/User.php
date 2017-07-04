@@ -49,11 +49,6 @@ class User
     protected $token;
     
     /**
-     * @ORM\Column(name="user_salt")  
-     */
-    protected $salt;
-    
-    /**
      * Returns user ID.
      * @return integer
      */
@@ -95,10 +90,6 @@ class User
         return $this->token;
     }
 
-    public function getSalt() {
-        return $this->salt;
-    }
-
     public function setEmail($email) {
         $this->email = $email;
     }
@@ -121,10 +112,6 @@ class User
 
     public function setToken($token) {
         $this->token = $token;
-    }
-
-    public function setSalt($salt) {
-        $this->salt = $salt;
     }
 
 }

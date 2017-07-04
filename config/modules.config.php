@@ -35,4 +35,5 @@ return [
     'Application',
     'Authentification',
     'Zf3\Flashmessenger'
+    'ZendDeveloperTools',
 ];

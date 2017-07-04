@@ -57,6 +57,15 @@ class UserForm extends Form {
                 'label' => 'E-mail',
             ],
         ]);
+        
+        // Add "pseudo" field
+        $this->add([
+            'type' => 'text',
+            'name' => 'pseudo',
+            'options' => [
+                'label' => 'Pseudo',
+            ],
+        ]);
 
         // Add "full_name" field
         $this->add([
