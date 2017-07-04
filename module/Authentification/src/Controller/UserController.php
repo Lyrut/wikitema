@@ -94,7 +94,10 @@ class UserController extends AbstractActionController
                 // Get filtered and validated data
                 $data = $form->getData();
                 
-                //Ajouter la vérification de l'email dans la bdd pour ne pas avoir de doublon
+                if($this->checkIfUserExists($data["email"])){
+                    $this->flashMessenger()->addMessage("L'utilisateur existe déjà.");
+                    $this->redirect()->toRoute("list.users");
+                }
                 
                 // Add user.
                 $user = $this->addUser($data);
