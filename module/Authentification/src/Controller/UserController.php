@@ -2,10 +2,10 @@
 
 namespace Authentification\Controller;
 
+use Authentification\Entity\User;
 use Authentification\Form\UserForm;
 use Doctrine\ORM\EntityManager;
 use Exception;
-use Authentification\Entity\User;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -25,11 +25,7 @@ class UserController extends AbstractActionController
     {
         $this->entityManager = $entityManager;
     }
-    
-    /**
-     * This is the default "index" action of the controller. It displays the 
-     * list of users.
-     */
+
     public function indexAction() 
     {
         $users = $this->entityManager->getRepository(User::class)
@@ -37,6 +33,28 @@ class UserController extends AbstractActionController
         
         return new ViewModel([
             'users' => $users
+        ]);
+    }
+    
+    public function viewAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', -1);
+        if ($id<1) {
+            $this->flashMessenger()->addErrorMessage("l'id distribué n'est pas correcte");
+            $this->redirect()->toRoute('list.users');
+        }
+        
+        // Find a user with such ID.
+        $user = $this->entityManager->getRepository(User::class)
+                ->find($id);
+        
+        if ($user == null) {
+            $this->flashMessenger()->addErrorMessage("l'utilisateur n'existe pas");
+            $this->redirect()->toRoute('list.users');
+        }
+                
+        return new ViewModel([
+            'user' => $user
         ]);
     }
     

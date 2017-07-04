@@ -33,5 +33,6 @@ return [
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',
-    'Authentification'
+    'Authentification',
+    'Zf3\Flashmessenger'
 ];

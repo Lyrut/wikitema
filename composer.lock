@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ccd296f49c1ae81fd9df09c60f3d2716",
-    "content-hash": "8cd7cb5cc3263bb081b7fd382a3f08c4",
+    "hash": "467db8572a76b4c594eb4ba86584e806",
+    "content-hash": "0c5b828961a54be3a1ad9c2af9aa7116",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -819,6 +819,47 @@
             "time": "2016-12-18 15:42:34"
         },
         {
+            "name": "jenzri-nizar/zf3-flashmessenger",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenzri-nizar/zf3-flashmessenger.git",
+                "reference": "2f6f8fd0013767ac71f06e9eae9585c00f21dbaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenzri-nizar/zf3-flashmessenger/zipball/2f6f8fd0013767ac71f06e9eae9585c00f21dbaf",
+                "reference": "2f6f8fd0013767ac71f06e9eae9585c00f21dbaf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zf3\\Flashmessenger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jenzri Nizar",
+                    "email": "jenzri.nizar.off@gmail.com"
+                }
+            ],
+            "description": "Zend Framework 3 flashmessenger",
+            "keywords": [
+                "Zend Framework 3",
+                "flashmessenger",
+                "zend"
+            ],
+            "time": "2016-08-20 09:53:35"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -966,16 +1007,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "70d2a29b2911cbdc91a7e268046c395278238b2e"
+                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/70d2a29b2911cbdc91a7e268046c395278238b2e",
-                "reference": "70d2a29b2911cbdc91a7e268046c395278238b2e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a97e45d98c59510f085fa05225a1acb74dfe0546",
+                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546",
                 "shasum": ""
             },
             "require": {
@@ -1031,20 +1072,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-02 19:24:58"
+            "time": "2017-07-03 13:19:36"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d"
+                "reference": "bcfd02728d9b776e5c2195a4750c813fe440402f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/e9c50482841ef696e8fa1470d950a79c8921f45d",
-                "reference": "e9c50482841ef696e8fa1470d950a79c8921f45d",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/bcfd02728d9b776e5c2195a4750c813fe440402f",
+                "reference": "bcfd02728d9b776e5c2195a4750c813fe440402f",
                 "shasum": ""
             },
             "require": {
@@ -1087,7 +1128,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-01 21:01:25"
+            "time": "2017-06-06 14:51:55"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1150,16 +1191,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "347c4247a3e40018810b476fcd5dec36d46d08dc"
+                "reference": "05b5b7f1e26fe2f83827e7daae16191e6f742b8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/347c4247a3e40018810b476fcd5dec36d46d08dc",
-                "reference": "347c4247a3e40018810b476fcd5dec36d46d08dc",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/05b5b7f1e26fe2f83827e7daae16191e6f742b8f",
+                "reference": "05b5b7f1e26fe2f83827e7daae16191e6f742b8f",
                 "shasum": ""
             },
             "require": {
@@ -1214,7 +1255,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-06-02 09:10:29"
+            "time": "2017-06-24 09:29:48"
         },
         {
             "name": "zendframework/zend-authentication",

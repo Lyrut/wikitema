@@ -5,8 +5,9 @@ use Authentification\Business\Factory\UserBusinessFactory;
 use Authentification\Business\UserBusiness;
 use Authentification\Controller\Factory\UserControllerFactory;
 use Authentification\Controller\UserController;
-use Zend\Router\Http\Literal;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 
 return [
     'router' => [
@@ -28,6 +29,19 @@ return [
                     'defaults' => [
                         'controller' => UserController::class,
                         'action'     => 'add',
+                    ],
+                ],
+            ],
+            'view.users' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/user/view[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => UserController::class,
+                        'action'        => 'view',
                     ],
                 ],
             ],
