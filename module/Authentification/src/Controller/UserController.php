@@ -26,6 +26,16 @@ class UserController extends AbstractActionController
         $this->entityManager = $entityManager;
     }
     
+    
+    
+    private function checkIfUserExists($email) {
+        
+        $user = $this->entityManager->getRepository(User::class)
+                ->findOneByEmail($email);
+        
+        return $user !== null;
+    }
+    
     /**
      * This is the default "index" action of the controller. It displays the 
      * list of users.
@@ -63,6 +73,10 @@ class UserController extends AbstractActionController
                 $data = $form->getData();
                 
                 //Ajouter la vérification de l'email dans la bdd pour ne pas avoir de doublon
+                if($this->checkIfUserExists($data["email"])){
+                    $this->flashMessenger()->addMessage("L'utilisateur existe déjà.");
+                    $this->redirect()->toRoute("list.users");
+                }
                 
                 // Add user.
                 $user = $this->addUser($data);
@@ -80,21 +94,21 @@ class UserController extends AbstractActionController
     
     private function addUser($data) 
     {
-        // Do not allow several users with the same email address.
-        if($this->checkIfUserExists($data['email'])) {
-            throw new Exception("User with email address " . $data['$email'] . " already exists");
-        }
-        
+                
         // Create new User entity.
         $user = new User();
         $user->setEmail($data['email']);
-        $user->setFullName($data['full_name']);        
+        $user->setFullName($data['full_name']);
+        $user->setPseudo($data["pseudo"]);
 
         // a faire (encrypter le mot de passe)
         /*$bcrypt = new Bcrypt();
         $passwordHash = $bcrypt->create($data['password']);        
         $user->setPassword($passwordHash);
         */
+        
+        $user->setPassword(password_hash($data["password"], PASSWORD_BCRYPT));
+        
         
         $currentDate = date('Y-m-d H:i:s');
         $user->setDateCreated($currentDate);        
@@ -106,14 +120,6 @@ class UserController extends AbstractActionController
         $this->entityManager->flush();
         
         return $user;
-    }
-    
-    private function checkIfUserExists($email) {
-        
-        $user = $this->entityManager->getRepository(User::class)
-                ->findOneByEmail($email);
-        
-        return $user !== null;
     }
  
 }

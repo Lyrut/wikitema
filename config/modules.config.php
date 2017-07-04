@@ -32,6 +32,7 @@ return [
     'Zend\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
+    'ZendDeveloperTools',
     'Application',
     'Authentification'
 ];
