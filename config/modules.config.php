@@ -34,6 +34,6 @@ return [
     'DoctrineORMModule',
     'Application',
     'Authentification',
-    'Zf3\Flashmessenger'
+    'Zf3\Flashmessenger',
     'ZendDeveloperTools',
 ];
