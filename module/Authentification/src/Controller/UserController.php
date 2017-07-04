@@ -103,8 +103,8 @@ class UserController extends AbstractActionController
                 $user = $this->addUser($data);
                 
                 // Redirect to "view" page
-                return $this->redirect()->toRoute('users', 
-                        ['action'=>'view', 'id'=>$user->getId()]);                
+                return $this->redirect()->toRoute('view.users', 
+                        ['id'=>$user->getId()]);                
             }               
         } 
         
@@ -121,15 +121,8 @@ class UserController extends AbstractActionController
         $user->setEmail($data['email']);
         $user->setFullName($data['full_name']);
         $user->setPseudo($data["pseudo"]);
-
-        // a faire (encrypter le mot de passe)
-        /*$bcrypt = new Bcrypt();
-        $passwordHash = $bcrypt->create($data['password']);        
-        $user->setPassword($passwordHash);
-        */
         
         $user->setPassword(password_hash($data["password"], PASSWORD_BCRYPT));
-        
         
         $currentDate = date('Y-m-d H:i:s');
         $user->setDateCreated($currentDate);        
