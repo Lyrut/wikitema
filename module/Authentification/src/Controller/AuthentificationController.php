@@ -4,37 +4,104 @@ namespace Authentification\Controller;
 
 use Authentification\Entity\User;
 use Authentification\Form\LoginForm;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Result;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\SessionManager;
 use Zend\View\Model\ViewModel;
 
-class AuthentificationController extends AbstractActionController
-{
-    public function indexAction()
-    {
-        return new ViewModel();
+class AuthentificationController extends AbstractActionController {
+
+    /**
+     * Authentication service.
+     * @var AuthenticationService
+     */
+    private $authService;
+
+    /**
+     * Session manager.
+     * @var SessionManager
+     */
+    private $sessionManager;
+
+    /**
+     * Constructs the controller.
+     */
+    public function __construct($entityManager, $authService, $sessionManager) {
+        $this->authService = $authService;
+        $this->sessionManager = $sessionManager;
     }
-    
-    public function loginAction()
-    {
-        // Create user form
-        $form = new LoginForm($this->entityManager);
+
+    public function loginAction() {
         
+        $isLoginError = false;
+        // Create user form
+        $form = new LoginForm();
+
         if ($this->getRequest()->isPost()) {
-            
-            $data = $this->params()->fromPost();            
-            
+
+            $data = $this->params()->fromPost();
+
             $form->setData($data);
-            
+
             // Validate form
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $user = new User();
                 $user->setEmail($data['email']);
                 $user->setPassword($data['password']);
-            }               
-        } 
-        
+
+                $this->verifyIfUserAlreadyConnected();
+                
+                // Authenticate with login/password.
+                $authAdapter = $this->authService->getAdapter();
+                $authAdapter->setEmail($user->getEmail());
+                $authAdapter->setPassword($user->getPassword());
+                $result = $this->authService->authenticate();
+
+                if ($result->getCode() == Result::SUCCESS) {
+                    $isLoginError = false;
+                    $this->redirect()->toRoute('home');
+                } else {
+                    $isLoginError = true;
+                }
+            }
+        }
+
         return new ViewModel([
-                'form' => $form
-            ]);
+            'isLoginError' => $isLoginError,
+            'form' => $form
+        ]);
     }
+    
+    public function logoutAction() 
+    {        
+        $this->verifyIfUserIsNotConnected();
+        
+        // Remove identity from session.
+        $this->authService->clearIdentity();
+        $this->redirect()->toRoute('connexion');
+        return [];
+    }
+    
+    public function verifyloginAction()
+    {
+        dump($this->authService->getIdentity());
+        return [];
+    }
+
+    private function verifyIfUserAlreadyConnected() {
+        if ($this->authService->getIdentity() != null) {
+            $this->flashMessenger()->addErrorMessage("Vous êtes déjà connecté");
+            $this->redirect()->toRoute('home');
+        }
+    }
+    
+    private function verifyIfUserIsNotConnected()
+    {
+        if ($this->authService->getIdentity() == null) {
+            $this->flashMessenger()->addErrorMessage("Aucun utilisateur de connecté");
+            $this->redirect()->toRoute('connexion');
+        }
+    }
+
 }

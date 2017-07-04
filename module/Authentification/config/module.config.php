@@ -1,11 +1,16 @@
 <?php
+
 namespace Authentification;
 
-use Authentification\Business\Factory\UserBusinessFactory;
-use Authentification\Business\UserBusiness;
+use Authentification\Controller\AuthentificationController;
+use Authentification\Controller\Factory\AuthentificationControllerFactory;
 use Authentification\Controller\Factory\UserControllerFactory;
 use Authentification\Controller\UserController;
+use Authentification\Service\AuthentificationAdapter;
+use Authentification\Service\Factory\AuthentificationAdapterFactory;
+use Authentification\Service\Factory\AuthentificationServiceFactory;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Zend\Authentication\AuthenticationService;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 
@@ -15,33 +20,63 @@ return [
             'list.users' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/user',
+                    'route' => '/user',
                     'defaults' => [
                         'controller' => UserController::class,
-                        'action'     => 'index',
+                        'action' => 'index',
                     ],
                 ],
             ],
             'add.users' => [
-                'type'    => literal::class,
+                'type' => literal::class,
                 'options' => [
-                    'route'    => '/user/add',
+                    'route' => '/user/add',
                     'defaults' => [
                         'controller' => UserController::class,
-                        'action'     => 'add',
+                        'action' => 'add',
                     ],
                 ],
             ],
             'view.users' => [
-                'type'    => Segment::class,
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/user/view[/:id]',
+                    'route' => '/user/view[/:id]',
                     'constraints' => [
                         'id' => '[0-9]*',
                     ],
                     'defaults' => [
-                        'controller'    => UserController::class,
-                        'action'        => 'view',
+                        'controller' => UserController::class,
+                        'action' => 'view',
+                    ],
+                ],
+            ],
+            'connexion' => [
+                'type' => literal::class,
+                'options' => [
+                    'route' => '/connexion',
+                    'defaults' => [
+                        'controller' => AuthentificationController::class,
+                        'action' => 'login',
+                    ],
+                ],
+            ],
+            'test_connexion' => [
+                'type' => literal::class,
+                'options' => [
+                    'route' => '/test_connexion',
+                    'defaults' => [
+                        'controller' => AuthentificationController::class,
+                        'action' => 'verifylogin',
+                    ],
+                ],
+            ],
+            'deconnexion' => [
+                'type' => literal::class,
+                'options' => [
+                    'route' => '/deconnexion',
+                    'defaults' => [
+                        'controller' => AuthentificationController::class,
+                        'action' => 'logout',
                     ],
                 ],
             ],
@@ -50,11 +85,13 @@ return [
     'controllers' => [
         'factories' => [
             UserController::class => UserControllerFactory::class,
+            AuthentificationController::class => AuthentificationControllerFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            UserBusiness::class => UserBusinessFactory::class,
+            AuthenticationService::class => AuthentificationServiceFactory::class,
+            AuthentificationAdapter::class => AuthentificationAdapterFactory::class,
         ],
     ],
     'view_manager' => [
