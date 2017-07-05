@@ -47,6 +47,12 @@ class Article {
      */
     protected $user;
     
+    /**
+     * @ORM\Column(name="article_date_created")  
+     */
+    protected $date_created;
+
+
     public function getId() {
         return $this->id;
     }
@@ -69,6 +75,10 @@ class Article {
 
     public function getUser() {
         return $this->user;
+    }
+    
+    public function getDate_created() {
+        return $this->date_created;
     }
 
     public function setId($id) {
@@ -95,5 +105,8 @@ class Article {
         $this->user = $user;
     }
 
+    public function setDate_created($date) {
+        $this->date_created = $date;
+    }
 
 }

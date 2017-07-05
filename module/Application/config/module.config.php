@@ -44,6 +44,16 @@ return [
                     ],
                 ],
             ],
+            'article' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/add',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'add',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
