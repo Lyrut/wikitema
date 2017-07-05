@@ -2,14 +2,14 @@
 -- Base de données :  `wikitema`
 --
 
-
+CREATE DATABASE IF NOT EXISTS `wikitema`;
 
 --
 -- Structure de la table `user`
 --
 
 CREATE TABLE if not exists `user` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) AUTO_INCREMENT NOT NULL,
   `user_full_name` varchar(255) NOT NULL,
   `user_pseudo` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE if not exists `user` (
 
 
 CREATE TABLE if not exists `theme` (
-  `theme_id` int(11) NOT NULL,
+  `theme_id` int(11) AUTO_INCREMENT NOT NULL,
   `theme_name` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --
@@ -31,7 +31,7 @@ CREATE TABLE if not exists `theme` (
 --
 
 CREATE TABLE if not exists `article` (
-  `article_id` int(11) NOT NULL,
+  `article_id` int(11) AUTO_INCREMENT NOT NULL,
   `article_theme_id` varchar(255) NOT NULL,
   `article_title` varchar(255) NOT NULL,
   `article_text` longtext NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE if not exists `article` (
 --
 
 CREATE TABLE if not exists `media` (
-  `media_id` int(11) NOT NULL,
+  `media_id` int(11) AUTO_INCREMENT NOT NULL,
   `media_name` varchar(255) NOT NULL,
   `media_description` varchar(255),
   `media_user_text` varchar(255),
