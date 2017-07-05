@@ -35,6 +35,9 @@ class AuthentificationController extends AbstractActionController {
     public function loginAction() {
         
         $isLoginError = false;
+        
+        $this->verifyIfUserAlreadyConnected();
+        
         // Create user form
         $form = new LoginForm();
 

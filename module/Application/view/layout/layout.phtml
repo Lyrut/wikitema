@@ -40,7 +40,11 @@
                             <input class="uk-search-input" type="search" placeholder="Recherche...">
                         </form>
                     </div>
-                    <li><a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
+                    <?php if($user = $this->identity()) : ?>
+                        <li><a class="uk-navbar-item" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a></li>
+                    <?php else : ?>
+                        <li><a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>
