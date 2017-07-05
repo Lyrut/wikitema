@@ -72,9 +72,13 @@ class AuthentificationAdapter implements AdapterInterface
         $passwordHash = $user->getPassword();
         
         if (password_verify($this->password, $passwordHash)) {
+            $user->setPassword("");
+            $user->setId("");
+            
+            
             return new Result(
-                    Result::SUCCESS, 
-                    $this->email, 
+                    Result::SUCCESS,
+                    ["email"=>$user->getEmail(),"role"=>$user->getRole()], 
                     ['Authenticated successfully.']);        
         }             
         
