@@ -1,56 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
---
--- Client :  127.0.0.1
--- Généré le :  Mar 04 Juillet 2017 à 11:56
--- Version du serveur :  5.7.14
--- Version de PHP :  5.6.25
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de données :  `wikitema`
 --
 
--- --------------------------------------------------------
 
---
--- Structure de la table `article`
---
-
-CREATE TABLE `article` (
-  `article_id` int(11) NOT NULL,
-  `article_name` varchar(255) NOT NULL,
-  `article_title` varchar(255) NOT NULL,
-  `article_text` longtext NOT NULL,
-  `article_commentaire` longtext NOT NULL,
-  `article_user` int(11) NOT NULL,
-  `article_page_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `image`
---
-
-CREATE TABLE `image` (
-  `image_id` int(11) NOT NULL,
-  `image_name` varchar(255) NOT NULL,
-  `image_description` varchar(255) NOT NULL,
-  `image_user` int(11) NOT NULL,
-  `image_user_text` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `user`
@@ -58,20 +10,51 @@ CREATE TABLE `image` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `user_surname` varchar(255) NOT NULL,
+  `user_full_name` varchar(255) NOT NULL,
   `user_pseudo` varchar(255) NOT NULL,
-  `user_password` tinyblob NOT NULL,
+  `user_password` varchar(255) NOT NULL,
   `user_email` tinytext NOT NULL,
-  `user_token` binary(32) NOT NULL,
-  `user_salt` varchar(255) NOT NULL,
+  `user_token` binary(32),
   `user_date_created` date NOT NULL,
   `user_role` int(1) NOT NULL DEFAULT 3
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+
+CREATE TABLE `theme` (
+  `theme_id` int(11) NOT NULL,
+  `theme_name` varchar(255) NOT NULL,
+) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+--
+-- Structure de la table `article`
+--
+
+CREATE TABLE `article` (
+  `article_id` int(11) NOT NULL,
+  `article_theme_id` varchar(255) NOT NULL,
+  `article_title` varchar(255) NOT NULL,
+  `article_text` longtext NOT NULL,
+  `article_commentaire` longtext,
+  `article_user` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Index pour les tables exportées
+-- Structure de la table `media`
 --
+
+CREATE TABLE `media` (
+  `media_id` int(11) NOT NULL,
+  `media_name` varchar(255) NOT NULL,
+  `media_description` varchar(255),
+  `media_user_text` varchar(255),
+  `media_lien` varchar(255),
+  `media_article_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Index pour la table `article`
