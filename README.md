@@ -50,7 +50,7 @@ configuration in `config/autoload/development.local.php.dist`. Enabling
 development mode will copy these files to versions removing the `.dist` suffix,
 while disabling development mode will remove those copies.
 
-Development mode is automatically enabled as part of the skeleton installation process. 
+Development mode is automatically enabled as part of the skeleton installation process.
 After making changes to one of the above-mentioned `.dist` configuration files you will
 either need to disable then enable development mode for the changes to take effect,
 or manually make matching updates to the `.dist`-less copies of those files.

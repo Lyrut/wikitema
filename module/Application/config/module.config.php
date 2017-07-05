@@ -35,11 +35,33 @@ return [
                     ],
                 ],
             ],
+            'articles' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/articles',
+                    'defaults' => [
+                        'controller' => Controller\ArticlesController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'connexion' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/connexion',
+                    'defaults' => [
+                        'controller' => Controller\UserController::class,
+                        'action'     => 'connexion',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => InvokableFactory::class,
+            Controller\ArticlesController::class => InvokableFactory::class,
+            Controller\UserController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
