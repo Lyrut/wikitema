@@ -12,6 +12,13 @@ use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractActionController
 {
+
+    /**
+    * Entity manager.
+    * @var EntityManager
+    */
+    private $entityManager;
+    
     public function viewAction()
     {
         return new ViewModel();
