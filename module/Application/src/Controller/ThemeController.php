@@ -2,12 +2,13 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Theme;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\SessionManager;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class ThemeController extends AbstractActionController
 {
     /**
      * Authentication service.
@@ -31,6 +32,21 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     {
-        return new ViewModel();
+        $themes = $this->entityManager->getRepository(Theme::class)
+                ->findBy([], ['id' => 'ASC']);
+
+        return new ViewModel([
+            'themes' => $themes
+        ]);
+    }
+    
+    public function addAction()
+    {
+        $themes = $this->entityManager->getRepository(Theme::class)
+                ->findBy([], ['id' => 'ASC']);
+
+        return new ViewModel([
+            'themes' => $themes
+        ]);
     }
 }

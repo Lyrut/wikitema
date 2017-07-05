@@ -1,0 +1,30 @@
+<h1>Manage Themes</h1>
+
+<p>
+<a class="btn btn-default" href="
+    <?= $this->url('add.themes'); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Theme
+</a>
+</p>
+
+<table class="table table-striped">
+
+   <tr>
+        <th>ID</th>
+        <th>Name</th>       
+    </tr>
+    
+    <?php foreach ($themes as $theme): ?>
+    
+    <tr>
+        <td><?= $this->escapeHtml($theme->getId()); ?></td>
+        <td>
+            <a href="<?= $this->url('view.themes', ['id'=>$theme->getId()]); ?>">
+                <?= $this->escapeHtml($theme->getName()); ?>
+            </a> 
+        </td> 
+    </tr>
+        
+    <?php endforeach; ?>   
+    
+</table>
