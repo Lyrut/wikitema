@@ -27,13 +27,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-  `id_article` int(11) NOT NULL,
-  `name_article` varchar(255) NOT NULL,
-  `title_article` varchar(255) NOT NULL,
-  `text_article` mediumblob NOT NULL,
-  `commentaire_article` varbinary(767) NOT NULL,
-  `user_article` int(11) NOT NULL,
-  `page_id_article` int(11) NOT NULL
+  `article_id` int(11) NOT NULL,
+  `article_name` varchar(255) NOT NULL,
+  `article_title` varchar(255) NOT NULL,
+  `article_text` mediumblob NOT NULL,
+  `article_commentaire` varbinary(767) NOT NULL,
+  `article_user` int(11) NOT NULL,
+  `article_page_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,22 +43,11 @@ CREATE TABLE `article` (
 --
 
 CREATE TABLE `image` (
-  `id_image` int(11) NOT NULL,
-  `name_image` varchar(255) NOT NULL,
-  `description_image` varchar(255) NOT NULL,
-  `user_image` int(11) NOT NULL,
-  `user_text_image` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `role`
---
-
-CREATE TABLE `role` (
-  `id_role` int(11) NOT NULL,
-  `role` varchar(255) NOT NULL
+  `image_id` int(11) NOT NULL,
+  `image_name` varchar(255) NOT NULL,
+  `image_description` varchar(255) NOT NULL,
+  `image_user` int(11) NOT NULL,
+  `image_user_text` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -76,7 +65,8 @@ CREATE TABLE `user` (
   `user_email` tinytext NOT NULL,
   `user_token` binary(32) NOT NULL,
   `user_salt` varchar(255) NOT NULL,
-  `user_date_created` date NOT NULL
+  `user_date_created` date NOT NULL,
+  `user_role` int(1) NOT NULL DEFAULT 3,
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -87,19 +77,13 @@ CREATE TABLE `user` (
 -- Index pour la table `article`
 --
 ALTER TABLE `article`
-  ADD PRIMARY KEY (`id_article`);
+  ADD PRIMARY KEY (`article_id`);
 
 --
 -- Index pour la table `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`id_image`);
-
---
--- Index pour la table `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id_role`);
+  ADD PRIMARY KEY (`image_id`);
 
 --
 -- Index pour la table `user`
