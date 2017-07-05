@@ -7,6 +7,7 @@
 
 namespace Application;
 
+use Application\Controller\IndexController;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -19,7 +20,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => IndexController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -29,8 +30,28 @@ return [
                 'options' => [
                     'route'    => '/application[/:action]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => IndexController::class,
                         'action'     => 'index',
+                    ],
+                ],
+            ],
+            'article' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'connexion' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/connexion',
+                    'defaults' => [
+                        'controller' => Controller\UserController::class,
+                        'action'     => 'connexion',
                     ],
                 ],
             ],
@@ -39,6 +60,8 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\ArticleController::class => InvokableFactory::class,
+            Controller\UserController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
