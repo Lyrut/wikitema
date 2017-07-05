@@ -30,8 +30,8 @@ CREATE TABLE `article` (
   `article_id` int(11) NOT NULL,
   `article_name` varchar(255) NOT NULL,
   `article_title` varchar(255) NOT NULL,
-  `article_text` mediumblob NOT NULL,
-  `article_commentaire` varbinary(767) NOT NULL,
+  `article_text` longtext NOT NULL,
+  `article_commentaire` longtext NOT NULL,
   `article_user` int(11) NOT NULL,
   `article_page_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -66,7 +66,7 @@ CREATE TABLE `user` (
   `user_token` binary(32) NOT NULL,
   `user_salt` varchar(255) NOT NULL,
   `user_date_created` date NOT NULL,
-  `user_role` int(1) NOT NULL DEFAULT 3,
+  `user_role` int(1) NOT NULL DEFAULT 3
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
