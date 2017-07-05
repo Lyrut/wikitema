@@ -15,10 +15,16 @@ class AuthentificationAdapter implements AdapterInterface
     private $email;
     
     /**
-     * Password
+     * User Password
      * @var string 
      */
     private $password;
+    
+    /**
+     * User Role
+     * @var string 
+     */
+    private $role;
     
     /**
      * Entity manager.
@@ -40,6 +46,14 @@ class AuthentificationAdapter implements AdapterInterface
     public function setEmail($email) 
     {
         $this->email = $email;        
+    }
+    
+    /**
+     * Sets user role.     
+     */
+    public function setRole($role) 
+    {
+        $this->role = $role;        
     }
     
     /**
@@ -71,10 +85,7 @@ class AuthentificationAdapter implements AdapterInterface
         // it with the password hash stored in database.
         $passwordHash = $user->getPassword();
         
-        if (password_verify($this->password, $passwordHash)) {
-            $user->setPassword("");
-            $user->setId("");
-            
+        if (password_verify($this->password, $passwordHash)) {            
             
             return new Result(
                     Result::SUCCESS,
