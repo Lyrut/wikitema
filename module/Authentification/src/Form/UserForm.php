@@ -96,6 +96,16 @@ class UserForm extends Form {
                 ],
             ]);
         }
+        
+        // Add "select_role" field
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'select_role',
+            'options' => [
+                    'label' => 'Select role',
+                    'value_options' => array( '2' => 'auteur', '3' => 'abonné' )
+                ],
+        ));
 
         // Add the Submit button
         $this->add([
@@ -139,7 +149,7 @@ class UserForm extends Form {
                 ],
             ],
         ]);
-
+        
         if ($this->scenario == 'create') {
 
             // Add input for "password" field

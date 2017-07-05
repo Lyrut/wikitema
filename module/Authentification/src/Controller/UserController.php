@@ -124,6 +124,8 @@ class UserController extends AbstractActionController
         
         $user->setPassword(password_hash($data["password"], PASSWORD_BCRYPT));
         
+        $user->setRole($data["select_role"]);
+        
         $currentDate = date('Y-m-d H:i:s');
         $user->setDateCreated($currentDate);        
                 

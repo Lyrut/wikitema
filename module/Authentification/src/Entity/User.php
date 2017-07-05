@@ -49,6 +49,11 @@ class User
     protected $token;
     
     /**
+     * @ORM\Column(name="user_role")  
+     */
+    protected $role;
+    
+    /**
      * Returns user ID.
      * @return integer
      */
@@ -89,6 +94,10 @@ class User
     public function getToken() {
         return $this->token;
     }
+    
+    public function getRole() {
+        return $this->role;
+    }
 
     public function setEmail($email) {
         $this->email = $email;
@@ -114,6 +123,9 @@ class User
         $this->token = $token;
     }
 
+    public function setRole($role) {
+        $this->role = $role;
+    }
 }
 
 
