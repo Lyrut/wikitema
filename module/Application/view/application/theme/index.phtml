@@ -1,8 +1,7 @@
 <h1>Manage Themes</h1>
 
 <p>
-<a class="btn btn-default" href="
-    <?= $this->url('add.themes'); ?>">
+<a class="btn btn-default" href="<?= $this->url('add.themes'); ?>">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Theme
 </a>
 </p>
@@ -11,7 +10,8 @@
 
    <tr>
         <th>ID</th>
-        <th>Name</th>       
+        <th>Name</th>
+        <th>Action</th>
     </tr>
     
     <?php foreach ($themes as $theme): ?>
@@ -22,9 +22,10 @@
             <a href="<?= $this->url('view.themes', ['id'=>$theme->getId()]); ?>">
                 <?= $this->escapeHtml($theme->getName()); ?>
             </a> 
-        </td> 
+        </td>
+        <td><a href="<?= $this->url('edit.themes', ['id'=>$theme->getId()]); ?>">
+                <?= $this->escapeHtml('Edit'); ?>
+            </a></td>
     </tr>
-        
-    <?php endforeach; ?>   
-    
+    <?php endforeach; ?>
 </table>

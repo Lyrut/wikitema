@@ -76,6 +76,45 @@ return [
                     ],
                 ],
             ],
+            'view.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/view[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'delete.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/delete[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'delete',
+                    ],
+                ],
+            ],
+            'edit.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/edit[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

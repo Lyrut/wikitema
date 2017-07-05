@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Theme;
+use Application\Form\ThemeForm;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\SessionManager;
@@ -43,13 +44,115 @@ class ThemeController extends AbstractActionController
         ]);
     }
     
-    public function addAction()
+    public function viewAction()
     {
-        $themes = $this->entityManager->getRepository(Theme::class)
-                ->findBy([], ['id' => 'ASC']);
+        $id = (int) $this->params()->fromRoute('id', -1);
+        
+        $theme = $this->getAndVerifyTheme($id);
 
         return new ViewModel([
-            'themes' => $themes
+            'theme' => $theme
         ]);
+    }
+    
+    public function addAction()
+    {
+        $form = new ThemeForm($this->entityManager);
+
+        if ($this->getRequest()->isPost()) {
+
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $theme = new Theme();
+                $theme->setName($data['name']);
+                
+                $this->entityManager->persist($theme);
+
+                // Apply changes to database.
+                $this->entityManager->flush();
+
+                return $this->redirect()->toRoute('view.themes', ['id' => $theme->getId()]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
+    
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', -1);
+        
+        $theme = $this->getAndVerifyTheme($id);
+
+        $this->entityManager->remove($theme);
+
+        // Apply changes to database.
+        $this->entityManager->flush();
+        
+        return $this->redirect()->toRoute('list.themes');
+       
+    }
+    
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', -1);
+        
+        $theme = $this->getAndVerifyTheme($id);
+        
+        $form = new ThemeForm($this->entityManager, $theme);
+
+        if ($this->getRequest()->isPost()) {
+
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $theme->setName($data['name']);
+
+                // Apply changes to database.
+                $this->entityManager->flush();
+
+                return $this->redirect()->toRoute('list.themes');
+            }
+        } else {
+            $form->setData(array(
+                    'name'=>$theme->getName(),                   
+                ));
+        }
+
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
+    
+    private function getAndVerifyTheme($id)
+    {
+        if ($id < 1) {
+            $this->flashMessenger()->addErrorMessage("l'id distribué n'est pas correcte");
+            $this->redirect()->toRoute('list.themes');
+        }
+
+        // Find a user with such ID.
+        $theme = $this->entityManager->getRepository(Theme::class)
+                ->find($id);
+
+        if ($theme == null) {
+            $this->flashMessenger()->addErrorMessage("le theme n'existe pas");
+            $this->redirect()->toRoute('list.themes');
+        }
+        
+        return $theme;
     }
 }

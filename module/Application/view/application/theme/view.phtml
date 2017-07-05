@@ -1,0 +1,17 @@
+<div class="uk-align-center">
+    <div class="uk-align-left uk-inline uk-card uk-card-small uk-card-default uk-card-hover">
+        <table class="uk-table">
+             <tr>
+                <th>ID:</th>
+                <td><?= $this->escapeHtml($theme->getId()) ?></td>
+            </tr>
+            <tr>
+                <th>Nom:</th>
+                <td><?= $this->escapeHtml($theme->getName()) ?></td>
+            </tr>
+        </table>
+    </div>
+    <a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
+        <?= $this->escapeHtml('Delete'); ?>
+    </a>
+</div>
