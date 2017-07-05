@@ -8,7 +8,7 @@ CREATE DATABASE IF NOT EXISTS `wikitema`;
 -- Structure de la table `user`
 --
 
-CREATE TABLE if not exists `user` (
+CREATE TABLE if not exists `wikitema`.`user` (
   `user_id` int(11) AUTO_INCREMENT NOT NULL,
   `user_full_name` varchar(255) NOT NULL,
   `user_pseudo` varchar(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE if not exists `user` (
 -- --------------------------------------------------------
 
 
-CREATE TABLE if not exists `theme` (
+CREATE TABLE if not exists `wikitema`.`theme` (
   `theme_id` int(11) AUTO_INCREMENT NOT NULL,
   `theme_name` varchar(255) NOT NULL,
 PRIMARY KEY (`theme_id`)
@@ -32,13 +32,14 @@ PRIMARY KEY (`theme_id`)
 -- Structure de la table `article`
 --
 
-CREATE TABLE if not exists `article` (
+CREATE TABLE if not exists `wikitema`.`article` (
   `article_id` int(11) AUTO_INCREMENT NOT NULL,
   `article_theme_id` varchar(255) NOT NULL,
   `article_title` varchar(255) NOT NULL,
   `article_text` longtext NOT NULL,
   `article_commentaire` longtext,
   `article_user` int(11) NOT NULL,
+  `article_date_created` date NOT NULL,
 PRIMARY KEY (`article_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -48,7 +49,7 @@ PRIMARY KEY (`article_id`)
 -- Structure de la table `media`
 --
 
-CREATE TABLE if not exists `media` (
+CREATE TABLE if not exists `wikitema`.`media` (
   `media_id` int(11) AUTO_INCREMENT NOT NULL,
   `media_name` varchar(255) NOT NULL,
   `media_description` varchar(255),
@@ -60,23 +61,3 @@ PRIMARY KEY (`media_id`)
 
 -- --------------------------------------------------------
 
---
--- Index pour la table `article`
---
-ALTER TABLE `article`
-  ADD PRIMARY KEY (`article_id`);
-
---
--- Index pour la table `image`
---
-ALTER TABLE `media`
-  ADD PRIMARY KEY (`media_id`);
-
---
--- Index pour la table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
-
-ALTER TABLE `theme`
-  ADD PRIMARY KEY (`theme_id`);
