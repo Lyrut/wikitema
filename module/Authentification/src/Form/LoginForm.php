@@ -7,6 +7,7 @@ use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
 
 class LoginForm extends Form {
+
     /**
      * Entity manager.
      * @var Doctrine\ORM\EntityManager 
@@ -18,7 +19,7 @@ class LoginForm extends Form {
      * @var User\Entity\User 
      */
     private $user = null;
-    
+
     /**
      * Constructor.     
      */
@@ -36,7 +37,7 @@ class LoginForm extends Form {
         $this->addElements();
         $this->addInputFilter();
     }
-    
+
     /**
      * This method adds elements to form (input fields and submit button).
      */
@@ -67,9 +68,19 @@ class LoginForm extends Form {
                 'value' => 'Login'
             ],
         ]);
+
+        $this->add([
+            'type' => 'csrf',
+            'name' => 'csrf',
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 300
+                ]
+            ],
+        ]);
     }
-    
-     private function addInputFilter() {
+
+    private function addInputFilter() {
         // Create main input filter
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
@@ -115,4 +126,5 @@ class LoginForm extends Form {
             ],
         ]);
     }
+
 }

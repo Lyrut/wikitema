@@ -25,6 +25,7 @@
         ?>
     </head>
     <body>
+
         <div class="uk-offcanvas-content">
             <div id="offcanvas-reveal" uk-offcanvas="mode: reveal">
                 <div class="uk-offcanvas-bar">
@@ -34,26 +35,29 @@
                 </div>
             </div>
         </div>
-
         <nav class="uk-navbar-container" uk-navbar>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <li><a class="uk-navbar-item uk-logo" href="#">Wikitema</a></li>
-                        <li class="uk-active uk-visible@l"><a href="<?= $this->url('home') ?>">Accueil</a></li>
-                    </ul>
-                </div>
-                <div class="uk-navbar-right">
-                    <ul class="uk-navbar-nav">
-                        <div class="uk-navbar-item">
-                            <form class="uk-search uk-search-default">
-                                <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                                <input class="uk-search-input" type="search" placeholder="Recherche...">
-                            </form>
-                        </div>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li><a class="uk-navbar-item uk-logo" href="#">Wikitema</a></li>
+                    <li class="uk-active uk-visible@l"><a href="<?= $this->url('home') ?>">Accueil</a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <div class="uk-navbar-item">
+                        <form class="uk-search uk-search-default">
+                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <input class="uk-search-input" type="search" placeholder="Recherche...">
+                        </form>
+                    </div>
+                    <?php if($user = $this->identity()) : ?>
+                        <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a></li>
+                    <?php else : ?>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
-                        <li><a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" uk-navbar-toggle-icon href="" uk-toggle="target: #offcanvas-reveal"></a></li>
-                    </ul>
-                </div>
+                    <?php endif; ?>
+                    <li><a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" uk-navbar-toggle-icon href="" uk-toggle="target: #offcanvas-reveal"></a></li>
+                </ul>
+            </div>
         </nav>
         <div class="uk-section uk-section-default">
             <div class="uk-container uk-container-small uk-position-relative">
