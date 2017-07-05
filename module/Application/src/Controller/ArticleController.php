@@ -10,7 +10,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class ArticlesController extends AbstractActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
