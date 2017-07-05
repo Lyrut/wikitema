@@ -123,7 +123,7 @@ class UserForm extends Form {
             'type' => 'submit',
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Create'
+                'value' => 'Créer'
             ],
         ]);
     }
