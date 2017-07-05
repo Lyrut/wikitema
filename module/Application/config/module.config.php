@@ -34,12 +34,12 @@ return [
                     ],
                 ],
             ],
-            'articles' => [
+            'article' => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/articles',
+                    'route'    => '/article',
                     'defaults' => [
-                        'controller' => Controller\ArticlesController::class,
+                        'controller' => Controller\ArticleController::class,
                         'action'     => 'view',
                     ],
                 ],
@@ -49,7 +49,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
-            Controller\ArticlesController::class => Controller\Factory\ArticleControllerFactory::class,
+            Controller\ArticleController::class => Controller\Factory\ArticleControllerFactory::class,
         ],
     ],
     'view_manager' => [
