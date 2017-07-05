@@ -44,12 +44,23 @@ return [
                     ],
                 ],
             ],
+            'list.themes' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/theme',
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
             Controller\ArticleController::class => Controller\Factory\ArticleControllerFactory::class,
+            Controller\ThemeController::class => Controller\Factory\ThemeControllerFactory::class,
         ],
     ],
     'view_manager' => [
