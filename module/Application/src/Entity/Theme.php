@@ -4,7 +4,7 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * This class represents a registered user.
+ * This class represents a theme.
  * @ORM\Entity()
  * @ORM\Table(name="theme")
  */

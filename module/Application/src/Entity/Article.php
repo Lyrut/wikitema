@@ -3,6 +3,8 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * This class represents a registered user.
@@ -19,11 +21,9 @@ class Article {
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Application\Entity\Theme")
-     * @ORM\JoinTable(name="article_theme",
-     *      joinColumns={@ORM\JoinColumn(name="article_theme_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="theme_id", referencedColumnName="id")}
-     *      )
+     * Many articles have One theme.
+     * @ManyToOne(targetEntity="Theme")
+     * @JoinColumn(name="article_theme_id", referencedColumnName="theme_id")
      */
     protected $theme;
     
