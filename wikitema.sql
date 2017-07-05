@@ -8,7 +8,7 @@
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE if not exists `user` (
   `user_id` int(11) NOT NULL,
   `user_full_name` varchar(255) NOT NULL,
   `user_pseudo` varchar(255) NOT NULL,
@@ -17,27 +17,27 @@ CREATE TABLE `user` (
   `user_token` binary(32),
   `user_date_created` date NOT NULL,
   `user_role` int(1) NOT NULL DEFAULT 3
-) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 
-CREATE TABLE `theme` (
+CREATE TABLE if not exists `theme` (
   `theme_id` int(11) NOT NULL,
-  `theme_name` varchar(255) NOT NULL,
-) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+  `theme_name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --
 -- Structure de la table `article`
 --
 
-CREATE TABLE `article` (
+CREATE TABLE if not exists `article` (
   `article_id` int(11) NOT NULL,
   `article_theme_id` varchar(255) NOT NULL,
   `article_title` varchar(255) NOT NULL,
   `article_text` longtext NOT NULL,
   `article_commentaire` longtext,
   `article_user` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -45,14 +45,14 @@ CREATE TABLE `article` (
 -- Structure de la table `media`
 --
 
-CREATE TABLE `media` (
+CREATE TABLE if not exists `media` (
   `media_id` int(11) NOT NULL,
   `media_name` varchar(255) NOT NULL,
   `media_description` varchar(255),
   `media_user_text` varchar(255),
   `media_lien` varchar(255),
   `media_article_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -65,8 +65,8 @@ ALTER TABLE `article`
 --
 -- Index pour la table `image`
 --
-ALTER TABLE `image`
-  ADD PRIMARY KEY (`image_id`);
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`media_id`);
 
 --
 -- Index pour la table `user`
