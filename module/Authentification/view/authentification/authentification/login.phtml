@@ -15,6 +15,7 @@ $form->get('password')->setAttributes([
 ?>
 
 <form method="post">
+    <?= $this->formElement($form->get('csrf')); ?>
 	<div class="uk-align-left">
         <div class="uk-inline">
             <span class="uk-form-icon" uk-icon="icon: user"></span>

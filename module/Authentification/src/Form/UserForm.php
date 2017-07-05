@@ -49,6 +49,17 @@ class UserForm extends Form {
      * This method adds elements to form (input fields and submit button).
      */
     protected function addElements() {
+        
+        $this->add([
+            'type' => 'csrf',
+            'name' => 'csrf',
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 300
+                ]
+            ],
+        ]);
+        
         // Add "email" field
         $this->add([
             'type' => 'text',
