@@ -45,23 +45,12 @@ return [
                     ],
                 ],
             ],
-            'connexion' => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/connexion',
-                    'defaults' => [
-                        'controller' => Controller\UserController::class,
-                        'action'     => 'connexion',
-                    ],
-                ],
-            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             Controller\ArticlesController::class => InvokableFactory::class,
-            Controller\UserController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
