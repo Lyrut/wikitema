@@ -35,16 +35,6 @@ return [
                     ],
                 ],
             ],
-            'article' => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/article',
-                    'defaults' => [
-                        'controller' => Controller\ArticleController::class,
-                        'action'     => 'view',
-                    ],
-                ],
-            ],
             'list.themes' => [
                 'type'    => Literal::class,
                 'options' => [
@@ -52,17 +42,6 @@ return [
                     'defaults' => [
                         'controller' => Controller\ThemeController::class,
                         'action'     => 'index',
-                    ],
-                ],
-            ],
-            
-            'article' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/article/add',
-                    'defaults' => [
-                        'controller' => Controller\ArticleController::class,
-                        'action' => 'add',
                     ],
                 ],
             ],
@@ -112,6 +91,26 @@ return [
                     'defaults' => [
                         'controller' => Controller\ThemeController::class,
                         'action'     => 'edit',
+                    ],
+                ],
+            ],
+            'view.articles' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'add.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/add',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'add',
                     ],
                 ],
             ],

@@ -5,6 +5,7 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Application\Entity\Theme;
 
 /**
  * This class represents a registered user.
@@ -36,14 +37,11 @@ class Article {
      * @ORM\Column(name="article_text")  
      */
     protected $text;
-
-    /** 
-     * @ORM\Column(name="article_commentaire")  
-     */
-    protected $commentaire;
     
     /**
-     * @ORM\Column(name="article_user")  
+     * Many articles have One user.
+     * @ManyToOne(targetEntity="Authentification\Entity\User")
+     * @JoinColumn(name="article_user_id", referencedColumnName="user_id")
      */
     protected $user;
     
@@ -69,10 +67,6 @@ class Article {
         return $this->text;
     }
 
-    public function getCommentaire() {
-        return $this->commentaire;
-    }
-
     public function getUser() {
         return $this->user;
     }
@@ -95,10 +89,6 @@ class Article {
 
     public function setText($text) {
         $this->text = $text;
-    }
-
-    public function setCommentaire($commentaire) {
-        $this->commentaire = $commentaire;
     }
 
     public function setUser($user) {
