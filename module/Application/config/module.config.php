@@ -51,6 +51,10 @@ return [
                     'defaults' => [
                         'controller' => Controller\ThemeController::class,
                         'action'     => 'index',
+                    ],
+                ],
+            ],
+            
             'article' => [
                 'type' => Literal::class,
                 'options' => [
