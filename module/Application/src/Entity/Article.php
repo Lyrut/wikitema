@@ -1,0 +1,99 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * This class represents a registered user.
+ * @ORM\Entity()
+ * @ORM\Table(name="article")
+ */
+
+class Article {
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="article_id")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Application\Entity\Theme")
+     * @ORM\JoinTable(name="article_theme",
+     *      joinColumns={@ORM\JoinColumn(name="article_theme_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="theme_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $theme;
+    
+    /** 
+     * @ORM\Column(name="article_title")  
+     */
+    protected $title;
+    
+    /** 
+     * @ORM\Column(name="article_text")  
+     */
+    protected $text;
+
+    /** 
+     * @ORM\Column(name="article_commentaire")  
+     */
+    protected $commentaire;
+    
+    /**
+     * @ORM\Column(name="article_user")  
+     */
+    protected $user;
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getTheme() {
+        return $this->theme;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getText() {
+        return $this->text;
+    }
+
+    public function getCommentaire() {
+        return $this->commentaire;
+    }
+
+    public function getUser() {
+        return $this->user;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setTheme($theme) {
+        $this->theme = $theme;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function setText($text) {
+        $this->text = $text;
+    }
+
+    public function setCommentaire($commentaire) {
+        $this->commentaire = $commentaire;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
+    }
+
+
+}
