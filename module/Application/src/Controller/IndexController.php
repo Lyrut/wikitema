@@ -28,9 +28,12 @@ class IndexController extends AbstractActionController
         $this->authService = $authService;
         $this->sessionManager = $sessionManager;
     }
-    
+
     public function indexAction()
     {
+        $user = $this->identity();
+        if($user == null) $this->redirect()->toRoute("connexion");
+
         return new ViewModel();
     }
 }

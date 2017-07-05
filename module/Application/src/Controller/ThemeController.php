@@ -22,10 +22,13 @@ class ThemeController extends AbstractActionController
      */
     private $sessionManager;
 
+    
+    private $entityManager;
     /**
      * Constructs the controller.
      */
     public function __construct($entityManager, $authService, $sessionManager) {
+        $this->entityManager = $entityManager;
         $this->authService = $authService;
         $this->sessionManager = $sessionManager;
     }
