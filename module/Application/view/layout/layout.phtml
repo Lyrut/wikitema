@@ -30,9 +30,24 @@
         ?>
         <script type="text/javascript">
             $(function () {
-                $("#search_article").autocomplete({source:"<?= $this->url("listJson.articles") ?>"});
-                
-                $("#btn_search_article").click(function(){
+                $.ajax({
+                    url: "<?= $this->url("listJson.articles") ?>",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $("#search_article").autocomplete({
+                            minLength: 3,
+                            autoFocus: true,
+                            source : data,
+                            select: function(e, ui) {
+                                var url = "<?= $this->url("redirectlist.articles")?>"+"?title="+$("#search_article").val();
+                                window.location.href = url;
+                            },
+                        });
+                    }
+                });
+
+                $("#btn_search_article").on("click", function(){
                     var url = "<?= $this->url("redirectlist.articles")?>"+"?title="+$("#search_article").val();
                     window.location.href = url;
                 });
@@ -50,14 +65,18 @@
                         <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Ajouter un article</a>
                         <a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a>
                     <?php endif; ?>
-                    <a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a>
+                    <?php if($user) : ?>
+                        <a class="uk-navbar-item" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a>
+                    <?php else : ?>
+                        <a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
         <nav class="uk-navbar-container" uk-navbar>
             <div class="uk-navbar-left">
                 <ul class="uk-navbar-nav">
-                    <li><a class="uk-navbar-item uk-logo" href="#">Wikitema</a></li>
+                    <li><a class="uk-navbar-item uk-logo" href="#"><img src="<?= $this->basePath('img/logo.png') ?>" alt="WikiTema"></a></li>
                     <li class="uk-active uk-visible@l"><a href="<?= $this->url('home') ?>">Accueil</a></li>
                     <?php if($user != null && $user->getRole()) : ?>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
@@ -67,18 +86,18 @@
             </div>
             <div class="uk-navbar-right">
                 <ul class="uk-navbar-nav">
-                    <div class="uk-navbar-item">
-                        <form class="uk-search uk-search-default">
-                            <a id="btn_search_article" class="uk-search-icon-flip" uk-search-icon></a>
-                            <input id="search_article" class="uk-search-input" type="search" placeholder="Recherche...">
-                        </form>
-                    </div>
                     <?php if($user) : ?>
+                        <div class="uk-navbar-item">
+                            <form class="uk-search uk-search-default">
+                                <a id="btn_search_article" class="uk-search-icon-flip" uk-search-icon></a>
+                                <input id="search_article" class="uk-search-input" type="search" placeholder="Recherche...">
+                            </form>
+                        </div>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a></li>
                     <?php else : ?>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
                     <?php endif; ?>
-                    <li><a class="uk-navbar-toggle uk-hidden@m uk-hidden@l" uk-navbar-toggle-icon href="" uk-toggle="target: #offcanvas-reveal"></a></li>
+                    <li><a class="uk-navbar-toggle uk-hidden@l" uk-navbar-toggle-icon href="" uk-toggle="target: #offcanvas-reveal"></a></li>
                 </ul>
             </div>
         </nav>
