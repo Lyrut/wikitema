@@ -23,11 +23,11 @@ class ArticleRepository extends EntityRepository {
                         ->getResult();
     }
 
-    public function getArticleByStartOfName($name) {
+    public function getArticleByTitle($title) {
         $querybuilder = $this->createQueryBuilder('c');
-        return $querybuilder->select('c.title')
-                        ->where('c.title like :title')
-                        ->setParameter('title', $name)
+        return $querybuilder->select()
+                        ->where('c.title = :title')
+                        ->setParameter('title', $title)
                         ->getQuery()
                         ->getResult();
     }

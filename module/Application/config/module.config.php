@@ -134,6 +134,16 @@ return [
                     ],
                 ],
             ],
+            'redirectlist.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/redirect_autocomplete',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'redirectAutocomplete',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

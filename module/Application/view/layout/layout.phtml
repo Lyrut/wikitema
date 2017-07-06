@@ -31,6 +31,11 @@
         <script type="text/javascript">
             $(function () {
                 $("#search_article").autocomplete({source:"<?= $this->url("listJson.articles") ?>"});
+                
+                $("#btn_search_article").click(function(){
+                    var url = "<?= $this->url("redirectlist.articles")?>"+"?title="+$("#search_article").val();
+                    window.location.href = url;
+                });
             });
         </script>
     </head>
@@ -64,7 +69,7 @@
                 <ul class="uk-navbar-nav">
                     <div class="uk-navbar-item">
                         <form class="uk-search uk-search-default">
-                            <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                            <a id="btn_search_article" class="uk-search-icon-flip" uk-search-icon></a>
                             <input id="search_article" class="uk-search-input" type="search" placeholder="Recherche...">
                         </form>
                     </div>

@@ -191,5 +191,20 @@ class ArticleController extends AbstractActionController {
         
         return new JsonModel($list);
     }
+    
+    public function redirectAutocompleteAction()
+    {
+        $article_title = $this->params()->fromQuery('title');
+        
+        //$article = $this->entityManager->getRepository(Article::class)->findOneByTitle($article_title);
+        $article = $this->entityManager->getRepository(Article::class)->getArticleByTitle($article_title);
+        
+        if (!$article) {
+            $this->flashMessenger()->addErrorMessage("L'utilisateur n'existe pas");
+            $this->redirect()->toRoute('index.articles');
+        }
+        
+        $this->redirect()->toRoute('view.articles', ['id'=>$article[0]->getId()]);
+    }
 
 }
