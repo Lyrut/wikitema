@@ -15,8 +15,8 @@ use Application\Entity\Theme;
 
 /**
  * This class represents a registered user.
- * @ORM\Entity(repositoryClass="Application\Repository\ArticleRepository")
- * @ORM\Table(name="article")
+ * @ORM\Entity(repositoryClass="Application\Repository\MediaRepository")
+ * @ORM\Table(name="media")
  */
 
 class Media {

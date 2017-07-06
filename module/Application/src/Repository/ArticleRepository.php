@@ -22,6 +22,16 @@ class ArticleRepository extends EntityRepository {
                         ->getQuery()
                         ->getResult();
     }
+    
+    public function getArticlesByUser($id) {
+        $querybuilder = $this->createQueryBuilder('c');
+        return $querybuilder->select()
+                        ->where('c.user = :id')
+                        ->setParameter('id', $id)
+                        ->orderBy('c.date_created', 'DESC')
+                        ->getQuery()
+                        ->getResult();
+    }
 
     public function getArticleByTitle($title) {
         $querybuilder = $this->createQueryBuilder('c');

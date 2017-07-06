@@ -1,0 +1,10 @@
+<div class="uk-grid-match uk-grid-small" uk-grid>
+    <div class="uk-width-1-2 uk-text-justify uk-grid-item-match">
+        <h1 class="uk-heading-divider">Vos articles mis en ligne</h1>
+        <?php
+            foreach($articles as $article) {
+                echo "<div class='uk-margin'><a href='".$this->url("edit.articles", array("id"=>$article->getId()))."'>".$article->getTitle()."</a></div>";
+            }
+        ?>
+    </div>
+</div>

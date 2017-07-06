@@ -154,6 +154,16 @@ return [
                     ],
                 ],
             ],
+            'listofuser.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/mylist',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'listofuser',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

@@ -236,6 +236,21 @@ class ArticleController extends AbstractActionController {
             'form' => $form
         ]);
     }
+    
+    public function listofuserAction(){
+        
+        $this->verifyRoleForUser(2);
+        
+        // Find a user with such ID.
+        $user = $this->authService->getIdentity()->getId();
+
+        $articles = $this->entityManager->getRepository(Article::class)
+                ->getArticlesByUser($user);
+        
+        return new ViewModel([
+            'articles' => $articles
+        ]);   
+    }
 
 
     private function getAndVerifyTheme($id)
