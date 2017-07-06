@@ -2,21 +2,24 @@
 
 namespace Authentification\Form;
 
+use Authentification\Entity\User;
+use Doctrine\ORM\EntityManager;
 use Zend\Form\Form;
-use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\Hostname;
+use Zend\Validator\Regex;
 
 class LoginForm extends Form {
 
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
+     * @var EntityManager 
      */
     private $entityManager = null;
 
     /**
      * Current user.
-     * @var User\Entity\User 
+     * @var User 
      */
     private $user = null;
 
@@ -91,6 +94,7 @@ class LoginForm extends Form {
             'required' => true,
             'filters' => [
                 ['name' => 'StringTrim'],
+                ['name' => 'StripTags']
             ],
             'validators' => [
                 [
@@ -103,8 +107,18 @@ class LoginForm extends Form {
                 [
                     'name' => 'EmailAddress',
                     'options' => [
-                        'allow' => \Zend\Validator\Hostname::ALLOW_DNS,
+                        'allow' => Hostname::ALLOW_DNS,
                         'useMxCheck' => false,
+                    ],
+                ],
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' => '/[a-z\d]+([\.\_]?[a-z\d]+)+@(hitema)(\.com)/i',
+                        'messages' =>  [
+                            Regex::INVALID => 'Invalid input, only a-z, 0-9 & - _ . characters allowed',
+                            Regex::NOT_MATCH => "Le mail n'est pas valide, veuillez vérifier que votre mail correspond au mail d'Hitema",
+                        ],
                     ],
                 ],
             ],
@@ -114,6 +128,7 @@ class LoginForm extends Form {
             'name' => 'password',
             'required' => true,
             'filters' => [
+                ['name' => 'StripTags']
             ],
             'validators' => [
                 [
