@@ -103,11 +103,6 @@ class UserController extends AbstractActionController {
     public function addAction() {
         
         $user = $this->authService->getIdentity();
-        if(!$user || 1 < $user->getRole())
-        {
-            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
-        }
         // Create user form
         $form = new UserForm('create', $this->entityManager);
 
