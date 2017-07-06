@@ -111,8 +111,6 @@ class ArticleController extends AbstractActionController {
         
         $article = $this->getAndVerifyArticle($id);
         
-        dump($article);die;
-        
         return new viewModel([
             'article' => $article
         ]);
