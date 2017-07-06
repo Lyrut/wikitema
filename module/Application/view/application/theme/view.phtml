@@ -11,9 +11,9 @@
             </tr>
         </table>
     </div>
-	<div class="uk-align-center">
+<div class="uk-align-center">
 		<div class="uk-button uk-button-default">
-			<a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
+			<a class="delete" data-confirm="Voulez-vous supprimer cet élément ?" href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
 			<?= $this->escapeHtml('Delete'); ?>
 		</a>
 		</div>
@@ -25,3 +25,18 @@
 			<a class="uk-button uk-button-default">Retour</a>
 	</div>
 </div>
+<script>
+var deleteLinks = document.querySelectorAll('.delete');
+
+for (var i = 0; i < deleteLinks.length; i++) {
+  deleteLinks[i].addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var choice = confirm(this.getAttribute('data-confirm'));
+
+      if (choice) {
+        window.location.href = this.getAttribute('href');
+      }
+  });
+}
+</script>
