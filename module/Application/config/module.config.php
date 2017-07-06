@@ -54,8 +54,7 @@ return [
                     ],
                 ],
             ],
-            
-            'article' => [
+            'article.add' => [
                 'type' => Literal::class,
                 'options' => [
                     'route' => '/article/add',
