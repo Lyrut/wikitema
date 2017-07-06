@@ -11,9 +11,17 @@
             </tr>
         </table>
     </div>
-	<div class="uk-button uk-button-default">
-		<a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
-        <?= $this->escapeHtml('Delete'); ?>
+	<div class="uk-align-center">
+		<div class="uk-button uk-button-default">
+			<a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
+			<?= $this->escapeHtml('Delete'); ?>
 		</a>
+		</div>
+	</div>
+	<div class="uk-align-center">
+			<div uk-form-custom="target: true">
+			<input type="file">
+			</div>
+			<a class="uk-button uk-button-default">Retour</a>
 	</div>
 </div>
