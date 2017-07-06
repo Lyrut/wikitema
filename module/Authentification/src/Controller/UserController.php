@@ -13,6 +13,12 @@ use Zend\View\Model\ViewModel;
 class UserController extends AbstractActionController {
 
     /**
+     * Authentication service.
+     * @var AuthenticationService
+     */
+    private $authService;
+    
+    /**
      * Entity manager.
      * @var EntityManager
      */
@@ -21,8 +27,10 @@ class UserController extends AbstractActionController {
     /**
      * Constructor. 
      */
-    public function __construct($entityManager) {
+    public function __construct($entityManager, $authService, $sessionManager) {
         $this->entityManager = $entityManager;
+        $this->authService = $authService;
+        $this->sessionManager = $sessionManager;
     }
 
     private function checkIfUserExists($email) {

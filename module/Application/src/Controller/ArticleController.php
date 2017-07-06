@@ -131,14 +131,27 @@ class ArticleController extends AbstractActionController {
     }
     
     public function editAction() {
+        
+        $id = (int) $this->params()->fromRoute('id', -1);
+        $article = $this->getAndVerifyArticle($id);
+        
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if(2 >= $user->getRole() && $article->getUser()->getId() != $user->getId())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        
         $themes = $this->entityManager->getRepository(Theme::class)
                 ->findBy([], ['id' => 'ASC']);
         $t = [];
         foreach ($themes as $data) {
             $t[$data->getId()] = $data->getName();
         }
-        $id = (int) $this->params()->fromRoute('id', -1);
-        $article = $this->getAndVerifyArticle($id);
         // Create user form
         $form = new ArticleForm($t, $this->entityManager, $article);
 
