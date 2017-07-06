@@ -4,12 +4,12 @@ $form->get('title')->setAttributes([
     'class'=>'uk-input uk-width-1-2'
     ]);
 
-$form->get('text')->setAttributes([
-    'class'=>'uk-textarea uk-width-1-2'
-    ]);
-
 $form->get('theme')->setAttributes([
     'class'=>'uk-select uk-width-1-2'
+    ]);
+
+$form->get('text')->setAttributes([
+    'class'=>'uk-textarea uk-width-1-2'
     ]);
 
 $form->get('submit')->setAttributes([
@@ -34,15 +34,15 @@ $form->prepare();
                 </div>
 
                 <div class="uk-margin">
-                    <?= $this->formLabel($form->get('text')); ?> <br>
-                    <?= $this->formElement($form->get('text')); ?>
-                    <?= $this->formElementErrors($form->get('text')); ?>
-                </div>
-
-                <div class="uk-margin">
                     <?= $this->formLabel($form->get('theme')); ?> <br>
                     <?= $this->formElement($form->get('theme')); ?>
                     <?= $this->formElementErrors($form->get('theme')); ?>
+                </div>
+
+                <div class="uk-margin">
+                    <?= $this->formLabel($form->get('text')); ?> <br>
+                    <?= $this->formElement($form->get('text')); ?>
+                    <?= $this->formElementErrors($form->get('text')); ?>
                 </div>
 
                 <?= $this->formElement($form->get('submit')); ?>
