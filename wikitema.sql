@@ -52,8 +52,10 @@ PRIMARY KEY (`media_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-INSERT INTO wikitema.`user` (user_id, user_full_name, user_pseudo, user_password, user_email, user_token, user_date_created, user_role)
-VALUES (1, 'admin', 'admin', '$2y$10$2MHF6rakOluCwdj6N0lg8u2/pxh3w9EwbXm5TX6ejzzu3J5t21HK.', 'admin@example.com', NULL, '2017-07-05', 1);
+INSERT INTO wikitema.`user` (user_id, user_full_name, user_pseudo, user_password, user_email, user_token, user_date_created, user_role) VALUES 
+(1, 'admin', 'admin', '$2y$10$2MHF6rakOluCwdj6N0lg8u2/pxh3w9EwbXm5TX6ejzzu3J5t21HK.', 'admin@hitema.com', NULL, '2017-07-05', 1),
+(2, 'jdoe', 'jdoe', '$2y$10$9EIunEjtkDZweLw6RNO8I.1G3n0qwgDUATYN.fW.DZEkIAW7IELya', 'jondoe@hitema.com', NULL, '2017-07-06', 2),
+(3, 'test', 'test', '$2y$10$O/jNWYavHxUOCFTM5Hf3J.1bNIAJEF7AcPVS1e1hepPEGJeSSTkcK', 'test@hitema.com', NULL, '2017-07-06', 3);
 
 INSERT INTO wikitema.theme (theme_id, theme_name)
 VALUES (1, 'haha');
