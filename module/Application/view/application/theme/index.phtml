@@ -1,34 +1,39 @@
-<div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
-    <div>
+<div class="uk-grid uk-grid-small uk-text-center" uk-grid>
+    <div class="uk-width-2-3">
         <div class="uk-tile uk-tile-muted uk-padding-remove">
             <p class="uk-h4">Liste des thématiques</p>
         </div>
+        </p>
+
+        <table class="uk-table uk-card uk-card-small uk-card-default uk-card-hover">
+            <thead>
+                <tr>
+                    <th class="uk-text-center">ID</th>
+                    <th class="uk-text-center">Name</th>
+                    <th class="uk-text-center">Action</th>
+                </tr>
+            </thead>
+
+            <?php foreach ($themes as $theme): ?>
+            <tbody>
+                <tr>
+                    <td><?= $this->escapeHtml($theme->getId()); ?></td>
+                    <td>
+                        <a href="<?= $this->url('view.themes', ['id'=>$theme->getId()]); ?>">
+                            <?= $this->escapeHtml($theme->getName()); ?>
+                        </a>
+                    </td>
+                    <td><a href="<?= $this->url('edit.themes', ['id'=>$theme->getId()]); ?>">
+                            <?= $this->escapeHtml('Edit'); ?>
+                        </a></td>
+                </tr>
+            </tbody>
+            <?php endforeach; ?>
+        </table>
     </div>
-<a class="uk-button" href="<?= $this->url('add.themes'); ?>">
-     Nouvelle thématique
-</a>
-</p>
-
-<table class="uk-table uk-card uk-card-small uk-card-default uk-card-hover">
-
-   <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Action</th>
-    </tr>
-
-    <?php foreach ($themes as $theme): ?>
-
-    <tr>
-        <td><?= $this->escapeHtml($theme->getId()); ?></td>
-        <td>
-            <a href="<?= $this->url('view.themes', ['id'=>$theme->getId()]); ?>">
-                <?= $this->escapeHtml($theme->getName()); ?>
-            </a>
-        </td>
-        <td><a href="<?= $this->url('edit.themes', ['id'=>$theme->getId()]); ?>">
-                <?= $this->escapeHtml('Edit'); ?>
-            </a></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+    <div class="uk-width-1-3">
+        <a class="uk-button uk-button-default" href="<?= $this->url('add.themes'); ?>">
+             Nouvelle thématique
+        </a>
+    </div>
+</div>

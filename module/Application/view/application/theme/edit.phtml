@@ -23,6 +23,7 @@ $form->prepare();
 			<?= $this->formElementErrors($form->get('name')); ?>
         </div>
         <?= $this->formElement($form->get('submit')); ?>
+    		<a class="uk-button uk-button-default" href="<?= $this->url('list.themes'); ?>">Retour</a>
         <?= $this->form()->closeTag(); ?>
     </div>
 </form>
