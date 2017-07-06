@@ -8,17 +8,17 @@ class ArticleRepository extends EntityRepository{
     
     public function getAllArticles()
     {
-        $querybuilder = $this->createQueryBuilder();
-        return $querybuilder->select('*')
-                    ->orderBy('article_id', 'ASC')
+        $querybuilder = $this->createQueryBuilder('c');
+        return $querybuilder->select()
+                    ->orderBy('c.id', 'ASC')
                     ->getQuery()->getResult();
     }
     
     public function getLastArticles()
     {
-        $querybuilder = $this->createQueryBuilder();
-        return $querybuilder->select('*')
-                    ->orderBy('article_date_created', 'DESC')
+        $querybuilder = $this->createQueryBuilder('c');
+        return $querybuilder->select()
+                    ->orderBy('c.date_created', 'DESC')
                     ->setMaxResults(3)
                     ->getQuery()->getResult();
     }
