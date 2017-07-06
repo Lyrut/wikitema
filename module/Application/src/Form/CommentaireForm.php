@@ -6,7 +6,7 @@ use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
 
-class ThemeForm extends Form {
+class CommentaireForm extends Form {
 
     /**
      * Entity manager.
@@ -16,14 +16,14 @@ class ThemeForm extends Form {
 
     /**
      * Current theme.
-     * @var Application\Entity\Theme 
+     * @var Application\Entity\Commentaire 
      */
-    private $theme = null;
+    private $commentaire = null;
 
     /**
      * Constructor.     
      */
-    public function __construct($entityManager = null, $theme = null) {
+    public function __construct($entityManager = null, $commentaire = null) {
         // Define form name
         parent::__construct('theme-form');
 
@@ -32,7 +32,7 @@ class ThemeForm extends Form {
 
         // Save parameters for internal use.
         $this->entityManager = $entityManager;
-        $this->theme = $theme;
+        $this->commentaire = $commentaire;
 
         $this->addElements();
         $this->addInputFilter();
@@ -42,12 +42,12 @@ class ThemeForm extends Form {
      * This method adds elements to form (input fields and submit button).
      */
     protected function addElements() {
-        // Add "email" field
+        // Add "text" field
         $this->add([
-            'type' => 'text',
-            'name' => 'name',
+            'type' => 'textarea',
+            'name' => 'text',
             'options' => [
-                'label' => 'Nom',
+                'label' => 'Commentaire : ',
             ],
         ]);
 
@@ -78,23 +78,14 @@ class ThemeForm extends Form {
 
         // Add input for "name" field
         $inputFilter->add([
-            'name' => 'name',
+            'name' => 'text',
             'required' => true,
             'filters' => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags']
             ],
-            'validators' => [
-                [
-                    'name' => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 128
-                    ],
-                ],
-            ],
+            
         ]);
     }
 
 }
-

@@ -3,8 +3,10 @@
 namespace Application\Controller;
 
 use Application\Entity\Article;
+use Application\Entity\Commentaire;
 use Application\Entity\Theme;
 use Application\Form\ArticleForm;
+use Application\Form\CommentaireForm;
 use Authentification\Entity\User;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -119,14 +121,57 @@ class ArticleController extends AbstractActionController {
         $id = (int) $this->params()->fromRoute('id', -1);
 
         $article = $this->getAndVerifyArticle($id);
+        
+        $form = new CommentaireForm($this->entityManager);
+        
+        if ($this->getRequest()->isPost()) {
+
+            // Fill in the form with POST data
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid()) {
+
+                // Get filtered and validated data
+                $data = $form->getData();
+
+                $commentaire = new Commentaire();
+                $commentaire->setArticle($article);
+                $commentaire->setText($data['text']);
+                $userWithInfo = $this->entityManager->getRepository(User::class)->find($this->authService->getIdentity()->getId());
+                $commentaire->setUser($userWithInfo);
+                $currentDate = date('Y-m-d H:i:s');
+                $commentaire->setDate_created($currentDate);
+
+                // Add the entity to the entity manager.
+                $this->entityManager->persist($commentaire);
+
+                // Apply changes to database.
+                $this->entityManager->flush();
+            }
+        }
+        
         $theme = $this->getAndVerifyTheme($article->getTheme()->getId());
-        $user = $this->getAndVerifyUser($article->getUser()->getId());
-        $user->setPassword('');
+        $userCreator = $this->getAndVerifyUser($article->getUser()->getId());
+        $userCreator->setPassword('');
+        $commentaires = $this->entityManager->getRepository(Commentaire::class)
+                ->getAllCommentairesByArticle($article->getId());
+        
+        foreach($commentaires as $comment)
+        {
+            $idUserComen = $comment->getUser()->getId();
+            $user = $this->entityManager->getRepository(User::class)->find($idUserComen);
+            $comment->setUser($user);
+        }
 
         return new viewModel([
             'article' => $article,
             'theme' => $theme,
-            'creatorOfArticle' => $user
+            'creatorOfArticle' => $userCreator,
+            'commentaires' => $commentaires,
+            'form' => $form,
         ]);
     }
 

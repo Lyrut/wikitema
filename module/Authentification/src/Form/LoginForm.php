@@ -94,6 +94,7 @@ class LoginForm extends Form {
             'required' => true,
             'filters' => [
                 ['name' => 'StringTrim'],
+                ['name' => 'StripTags']
             ],
             'validators' => [
                 [
@@ -116,7 +117,7 @@ class LoginForm extends Form {
                         'pattern' => '/[a-z\d]+([\.\_]?[a-z\d]+)+@(hitema)(\.com)/i',
                         'messages' =>  [
                             Regex::INVALID => 'Invalid input, only a-z, 0-9 & - _ . characters allowed',
-                            Regex::NOT_MATCH => "Le mail n'est pas valide, veuillez vérifier que votrre mail correspond au mail d'Hitema",
+                            Regex::NOT_MATCH => "Le mail n'est pas valide, veuillez vérifier que votre mail correspond au mail d'Hitema",
                         ],
                     ],
                 ],
@@ -127,6 +128,7 @@ class LoginForm extends Form {
             'name' => 'password',
             'required' => true,
             'filters' => [
+                ['name' => 'StripTags']
             ],
             'validators' => [
                 [
