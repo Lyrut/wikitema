@@ -107,8 +107,14 @@ class ArticleController extends AbstractActionController {
     
     public function viewAction()
     {
+        $id = (int) $this->params()->fromRoute('id', -1);
+        
+        $article = $this->getAndVerifyArticle($id);
+        
+        dump($article);die;
+        
         return new viewModel([
-            
+            'article' => $article
         ]);
     }
     
@@ -135,19 +141,38 @@ class ArticleController extends AbstractActionController {
     {
         if ($id < 1) {
             $this->flashMessenger()->addErrorMessage("Problème avec l'utilisateur connecté");
-            $this->redirect()->toRoute('list.themes');
+            $this->redirect()->toRoute('add.articles');
         }
 
         // Find a user with such ID.
-        $theme = $this->entityManager->getRepository(User::class)
+        $user = $this->entityManager->getRepository(User::class)
                 ->find($id);
 
-        if ($theme == null) {
-            $this->flashMessenger()->addErrorMessage("problème avec l'utilisateur connecté");
-            $this->redirect()->toRoute('list.themes');
+        if ($user == null) {
+            $this->flashMessenger()->addErrorMessage("Problème avec l'utilisateur connecté");
+            $this->redirect()->toRoute('add.articles');
         }
         
-        return $theme;
+        return $user;
+    }
+    
+    private function getAndVerifyArticle($id)
+    {
+        if ($id < 1) {
+            $this->flashMessenger()->addErrorMessage("L'id distribué n'est pas correcte");
+            $this->redirect()->toRoute('index.articles');
+        }
+
+        // Find a user with such ID.
+        $article = $this->entityManager->getRepository(Article::class)
+                ->find($id);
+
+        if ($article == null) {
+            $this->flashMessenger()->addErrorMessage("L'utilisateur n'existe pas");
+            $this->redirect()->toRoute('index.articles');
+        }
+        
+        return $article;
     }
 
 }

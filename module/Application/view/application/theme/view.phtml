@@ -11,7 +11,9 @@
             </tr>
         </table>
     </div>
-    <a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
+	<div class="uk-button uk-button-default">
+		<a href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
         <?= $this->escapeHtml('Delete'); ?>
-    </a>
+		</a>
+	</div>
 </div>

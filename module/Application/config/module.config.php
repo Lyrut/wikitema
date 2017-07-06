@@ -95,9 +95,9 @@ return [
                 ],
             ],
             'view.articles' => [
-                'type'    => Literal::class,
+                'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/article',
+                    'route'    => '/article/view[/:id]',
                     'defaults' => [
                         'controller' => Controller\ArticleController::class,
                         'action'     => 'view',
@@ -111,6 +111,16 @@ return [
                     'defaults' => [
                         'controller' => Controller\ArticleController::class,
                         'action' => 'add',
+                    ],
+                ],
+            ],
+            'index.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'index',
                     ],
                 ],
             ],
