@@ -23,7 +23,7 @@ class ThemeController extends AbstractActionController
      */
     private $sessionManager;
 
-    
+
     private $entityManager;
     /**
      * Constructs the controller.
@@ -33,7 +33,7 @@ class ThemeController extends AbstractActionController
         $this->authService = $authService;
         $this->sessionManager = $sessionManager;
     }
-    
+
     public function indexAction()
     {
         $this->verifyRoleForUser(1);
@@ -44,19 +44,19 @@ class ThemeController extends AbstractActionController
             'themes' => $themes
         ]);
     }
-    
+
     public function viewAction()
     {
         $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
-        
+
         $theme = $this->getAndVerifyTheme($id);
 
         return new ViewModel([
             'theme' => $theme
         ]);
     }
-    
+
     public function addAction()
     {
         $this->verifyRoleForUser(1);
@@ -74,7 +74,7 @@ class ThemeController extends AbstractActionController
 
                 $theme = new Theme();
                 $theme->setName($data['name']);
-                
+
                 $this->entityManager->persist($theme);
 
                 // Apply changes to database.
@@ -88,30 +88,30 @@ class ThemeController extends AbstractActionController
             'form' => $form
         ]);
     }
-    
+
     public function deleteAction()
     {
         $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
-        
+
         $theme = $this->getAndVerifyTheme($id);
 
         $this->entityManager->remove($theme);
 
         // Apply changes to database.
         $this->entityManager->flush();
-        
+
         return $this->redirect()->toRoute('list.themes');
-       
+
     }
-    
+
     public function editAction()
     {
         $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
-        
+
         $theme = $this->getAndVerifyTheme($id);
-        
+
         $form = new ThemeForm($this->entityManager, $theme);
 
         if ($this->getRequest()->isPost()) {
@@ -133,7 +133,7 @@ class ThemeController extends AbstractActionController
             }
         } else {
             $form->setData(array(
-                    'name'=>$theme->getName(),                   
+                    'name'=>$theme->getName(),
                 ));
         }
 
@@ -141,7 +141,7 @@ class ThemeController extends AbstractActionController
             'form' => $form
         ]);
     }
-    
+
     private function getAndVerifyTheme($id)
     {
         if ($id < 1) {
@@ -154,13 +154,13 @@ class ThemeController extends AbstractActionController
                 ->find($id);
 
         if ($theme == null) {
-            $this->flashMessenger()->addErrorMessage("le theme n'existe pas");
+            $this->flashMessenger()->addErrorMessage("le thème n'existe pas");
             $this->redirect()->toRoute('list.themes');
         }
-        
+
         return $theme;
     }
-    
+
     private function verifyRoleForUser($level_of_access)
     {
         $user = $this->authService->getIdentity();

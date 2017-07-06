@@ -22,24 +22,28 @@ $form->get('password')->setAttributes([
           <form method="post">
             <?= $this->formElement($form->get('csrf')); ?>
             <div class="uk-align-center">
-                <div class="uk-inline">
+                <div class="uk-inline uk-width-1-3@s">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
                     <?= $this->formElement($form->get('email')); ?>
                 </div>
-                <div class="uk-inline">
+                <div class="uk-inline uk-width-1-3@s">
                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
                     <?= $this->formElement($form->get('password')); ?>
                 </div>
             </div>
-            <div uk-form-custom="target: true">
-                <input type="file">
-            </div>
-            <input type="submit" class="uk-button uk-button-default uk-width-2-5" value="Valider">
 
-            <div uk-form-custom="target: true">
-      			<input type="file">
+            <div class="uk-align-center">
+                <div uk-form-custom="target: true">
+                    <input type="file">
+                </div>
+                <input type="submit" class="uk-button uk-button-default uk-width-2-5 uk-width-1-3@s" value="Valider">
+
+                <div uk-form-custom="target: true">
+          			<input type="file">
+                </div>
+                <input type="button" class="uk-button uk-button-default uk-width-2-5 uk-width-1-3@s" value="Mot de passe oublié ?">
+
             </div>
-            <input type="button" class="uk-button uk-button-default uk-width-2-5" value="Mot de passe oublié ?">
           </form>
       </div>
   </div>

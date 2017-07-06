@@ -45,35 +45,65 @@ $form->prepare();
                         <span class="uk-form-icon" uk-icon="icon: mail"></span>
                         <?= $this->formElement($form->get('email')); ?>
                     </div>
-                    <?= $this->formElementErrors($form->get('email')); ?>
+                        <?=
+                            $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render($form->get('email'));
+                        ?>
                 </div>
             	<div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon" uk-icon="icon: user"></span>
             			<?= $this->formElement($form->get('full_name')); ?>
-            			<?= $this->formElementErrors($form->get('full_name')); ?>
                     </div>
+                        <?=
+                            $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render($form->get('full_name'));
+                        ?>
                 </div>
             	<div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon" uk-icon="icon: user"></span>
                         <?= $this->formElement($form->get('pseudo')); ?>
-                        <?= $this->formElementErrors($form->get('pseudo')); ?>
                     </div>
+                        <?=
+                            $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render($form->get('pseudo'));
+                        ?>
                 </div>
             	<div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon" uk-icon="icon: lock"></span>
                         <?= $this->formElement($form->get('password')); ?>
-                        <?= $this->formElementErrors($form->get('password')); ?>
                     </div>
+                        <?=
+                            $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render($form->get('password'));
+                        ?>
                 </div>
             	<div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon" uk-icon="icon: lock"></span>
                         <?= $this->formElement($form->get('confirm_password')); ?>
-                        <?= $this->formElementErrors($form->get('confirm_password')); ?>
                     </div>
+                        <?=
+                            $this->formElementErrors()
+                            ->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render($form->get('confirm_password'));
+                        ?>
                 </div>
                 <div class="uk-margin">
                     <div class="uk-inline">
