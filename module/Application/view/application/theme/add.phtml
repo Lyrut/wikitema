@@ -26,5 +26,11 @@ $form->prepare();
         </div>
         <?= $this->formElement($form->get('submit')); ?>
         <?= $this->form()->closeTag(); ?>
-    </div>    
+    </div>
+	<div class="uk-align-center">
+			<div uk-form-custom="target: true">
+			<input type="file">
+			</div>
+			<a class="uk-button uk-button-default">Retour</a>
+	</div>
 </form>
