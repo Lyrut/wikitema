@@ -20,11 +20,11 @@ $form->prepare();
 <?= $this->formElement($form->get('csrf')); ?>
 	<div class="uk-align-center">
         <div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: mail"></span>
+            <span class="uk-form-icon" uk-icon="icon: user"></span>
 			<?= $this->formElement($form->get('name')); ?>
 			<?= $this->formElementErrors($form->get('name')); ?>
         </div>
         <?= $this->formElement($form->get('submit')); ?>
         <?= $this->form()->closeTag(); ?>
     </div>    
-</div>  
+</form>

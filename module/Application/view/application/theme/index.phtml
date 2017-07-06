@@ -1,12 +1,15 @@
-<h1>Manage Themes</h1>
-
-<p>
-<a class="btn btn-default" href="<?= $this->url('add.themes'); ?>">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Theme
+<div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
+    <div>
+        <div class="uk-tile uk-tile-muted uk-padding-remove">
+            <p class="uk-h4">Liste des thèmes</p>
+        </div>
+    </div>
+<a class="uk-button" href="<?= $this->url('add.themes'); ?>">
+     Nouveau Thème
 </a>
 </p>
 
-<table class="table table-striped">
+<table class="uk-table uk-card uk-card-small uk-card-default uk-card-hover">
 
    <tr>
         <th>ID</th>
