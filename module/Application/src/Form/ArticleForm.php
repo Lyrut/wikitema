@@ -56,7 +56,7 @@ class ArticleForm extends Form {
         
         $this->add([
             'type' => 'text',
-            'name' => 'titre',
+            'name' => 'title',
             'options' => [
                 'label' => 'Titre',
             ],
@@ -65,7 +65,7 @@ class ArticleForm extends Form {
         
         $this->add([
             'type' => 'text',
-            'name' => 'texte',
+            'name' => 'text',
             'options' => [
                 'label' => 'Texte',
             ],
@@ -73,7 +73,7 @@ class ArticleForm extends Form {
         
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
-            'name' => 'select_theme',
+            'name' => 'theme',
             'options' => [
                     'label' => 'Select Theme',
                     'value_options' => $themes

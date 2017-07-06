@@ -8,6 +8,7 @@
 namespace Application;
 
 use Application\Controller\IndexController;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 
@@ -34,16 +35,6 @@ return [
                     ],
                 ],
             ],
-            'article' => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/article',
-                    'defaults' => [
-                        'controller' => Controller\ArticleController::class,
-                        'action'     => 'view',
-                    ],
-                ],
-            ],
             'list.themes' => [
                 'type'    => Literal::class,
                 'options' => [
@@ -54,7 +45,66 @@ return [
                     ],
                 ],
             ],
-            'article.add' => [
+            'add.themes' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/theme/add',
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'add',
+                    ],
+                ],
+            ],
+            'view.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/view[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'delete.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/delete[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'delete',
+                    ],
+                ],
+            ],
+            'edit.themes' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/theme/edit[/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ThemeController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
+            'view.articles' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'add.articles' => [
                 'type' => Literal::class,
                 'options' => [
                     'route' => '/article/add',
@@ -88,5 +138,19 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+    ],
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
     ],
 ];

@@ -1,0 +1,30 @@
+<?php
+
+$form->get('name')->setAttributes([
+    'class'=>'uk-input', 
+    'placeholder'=>'Nom'
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'uk-button']);
+
+$form->prepare();
+?>
+<div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
+    <div>
+        <div class="uk-tile uk-tile-muted uk-padding-remove">
+            <p class="uk-h4">Ajout d'un thème</p>
+        </div>
+    </div>
+</div>
+<form method="post" class="uk-form-stacked">
+<?= $this->formElement($form->get('csrf')); ?>
+	<div class="uk-align-center">
+        <div class="uk-align-left uk-inline">
+            <span class="uk-form-icon" uk-icon="icon: mail"></span>
+			<?= $this->formElement($form->get('name')); ?>
+			<?= $this->formElementErrors($form->get('name')); ?>
+        </div>
+        <?= $this->formElement($form->get('submit')); ?>
+        <?= $this->form()->closeTag(); ?>
+    </div>    
+</div>  
