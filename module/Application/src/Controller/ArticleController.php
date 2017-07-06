@@ -9,6 +9,7 @@ use Authentification\Entity\User;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\SessionManager;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractActionController {
@@ -110,9 +111,14 @@ class ArticleController extends AbstractActionController {
         $id = (int) $this->params()->fromRoute('id', -1);
 
         $article = $this->getAndVerifyArticle($id);
-
+        $theme = $this->getAndVerifyTheme($article->getTheme()->getId());
+        $user = $this->getAndVerifyUser($article->getUser()->getId());
+        $user->setPassword('');
+        
         return new viewModel([
-            'article' => $article
+            'article' => $article,
+            'theme' => $theme,
+            'creatorOfArticle' => $user
         ]);
     }
 
@@ -171,6 +177,19 @@ class ArticleController extends AbstractActionController {
         }
 
         return $article;
+    }
+    
+    public function listJsonAction()
+    {
+        
+        $articles = $this->entityManager->getRepository(Article::class)->getAllArticles();
+        
+        $list = [];
+        foreach ($articles as $article) {
+            $list[$article->getId()] = $article->getTitle();
+        }
+        
+        return new JsonModel($list);
     }
 
 }

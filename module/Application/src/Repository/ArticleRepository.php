@@ -4,23 +4,32 @@ namespace Application\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class ArticleRepository extends EntityRepository{
-    
-    public function getAllArticles()
-    {
+class ArticleRepository extends EntityRepository {
+
+    public function getAllArticles() {
         $querybuilder = $this->createQueryBuilder('c');
         return $querybuilder->select()
-                    ->orderBy('c.id', 'ASC')
-                    ->getQuery()->getResult();
+                        ->orderBy('c.id', 'ASC')
+                        ->getQuery()
+                        ->getResult();
     }
-    
-    public function getLastArticles()
-    {
+
+    public function getLastArticles() {
         $querybuilder = $this->createQueryBuilder('c');
         return $querybuilder->select()
-                    ->orderBy('c.date_created', 'DESC')
-                    ->setMaxResults(3)
-                    ->getQuery()->getResult();
+                        ->orderBy('c.date_created', 'DESC')
+                        ->setMaxResults(3)
+                        ->getQuery()
+                        ->getResult();
     }
-    
+
+    public function getArticleByStartOfName($name) {
+        $querybuilder = $this->createQueryBuilder('c');
+        return $querybuilder->select('c.title')
+                        ->where('c.title like :title')
+                        ->setParameter('title', $name)
+                        ->getQuery()
+                        ->getResult();
+    }
+
 }

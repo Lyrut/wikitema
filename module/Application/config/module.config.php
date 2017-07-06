@@ -124,6 +124,16 @@ return [
                     ],
                 ],
             ],
+            'listJson.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/autocomplete',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'listJson',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -147,6 +157,9 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
     'doctrine' => [
