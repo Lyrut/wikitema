@@ -145,6 +145,7 @@ class UserForm extends Form {
             'required' => true,
             'filters' => [
                 ['name' => 'StringTrim'],
+                ['name' => 'StripTags']
             ],
             'validators' => [
                 [
@@ -181,6 +182,7 @@ class UserForm extends Form {
                 'name' => 'password',
                 'required' => true,
                 'filters' => [
+                    ['name' => 'StripTags']
                 ],
                 'validators' => [
                     [
@@ -198,6 +200,7 @@ class UserForm extends Form {
                 'name' => 'confirm_password',
                 'required' => true,
                 'filters' => [
+                    ['name' => 'StripTags']
                 ],
                 'validators' => [
                     [

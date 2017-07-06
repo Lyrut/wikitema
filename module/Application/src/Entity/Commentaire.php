@@ -9,7 +9,7 @@ use Application\Entity\Theme;
 
 /**
  * This class represents a registered user.
- * @ORM\Entity()
+ * @ORM\Entity("Application\Repository\CommentaireRepository")
  * @ORM\Table(name="commentaire")
  */
 
