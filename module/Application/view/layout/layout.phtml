@@ -63,22 +63,41 @@
             <div id="offcanvas-reveal" uk-offcanvas="mode: reveal">
                 <div class="uk-offcanvas-bar">
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
-                    <a class="uk-navbar-item" href="<?= $this->url('home') ?>">Accueil</a>
-                    <?php if($user != null) : // Vérifie si la variable de l'utilisateur n'est pas vide ?>
-                        <?php if($user->getRole() == 1) : // Si l'utilisateur est un Admin ?>
-                            <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Ajouter un article</a>
-                            <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Mes articles</a>
-                            <a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a>
-                        <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
-                            <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Ajouter un article</a>
-                            <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Mes articles</a>
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-active"><a href="<?= $this->url('home') ?>">Accueil</a></li>
+                        <?php if($user != null) : // Vérifie si la variable de l'utilisateur n'est pas vide ?>
+                            <?php if($user->getRole() == 1) : // Si l'utilisateur est un Admin ?>
+                                <li class="uk-parent">
+                                    <a href="#">Articles</a>
+                                    <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
+                                        <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </li>
+                                <li class="uk-parent">
+                                    <a href="#">Thématiques</a>
+                                    <ul class="uk-nav-sub">
+                                            <li><a href="<?= $this->url('list.themes') ?>">Liste des thématiques</a></li>
+                                            <li><a href="<?= $this->url('add.themes') ?>">Ajouter une thématique</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
+                            <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
+                                <li class="uk-parent">
+                                    <a href="#">Articles</a>
+                                    <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
+                                        <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
-                    <?php if($user) : // Si l'utilisateur est connecté ?>
-                        <a class="uk-navbar-item" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a>
-                    <?php else : ?>
-                        <a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a>
-                    <?php endif; ?>
+                        <?php if($user) : // Si l'utilisateur est connecté ?>
+                            <li><a class="uk-navbar-item" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a></li>
+                        <?php else : ?>
+                            <li><a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -89,13 +108,35 @@
                     <li class="uk-active uk-visible@l"><a href="<?= $this->url('home') ?>">Accueil</a></li>
                     <?php if($user != null) : ?>
                         <?php if($user->getRole() == 1) :  // Si l'utilisateur est un Admin ?>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Mes articles</a></li>
+                            <li class="uk-visible@l">
+                                <a href="#">Articles</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
+                                        <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-visible@l" href="#">Thématiques</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('list.themes') ?>">Liste des thématiques</a></li>
+                                        <li><a href="<?= $this->url('add.themes') ?>">Ajouter une thématique</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
                         <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Mes articles</a></li>
+                            <li class="uk-visible@l">
+                                <a href="#">Articles</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
+                                        <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         <?php endif; ?>
                     <?php endif; ?>
                 </ul>
@@ -117,6 +158,7 @@
                 </ul>
             </div>
         </nav>
+
         <div class="uk-section uk-section-default">
             <div class="uk-container uk-position-relative">
                 <div data-editable data-name="main-content">
@@ -124,6 +166,7 @@
                 </div>
             </div>
         </div>
+
         <footer class="uk-modal-footer uk-background-muted">
             <div class="uk-container">
                 <p>&copy; <?= date('Y') ?> by Axel Bolo, Bastien Koson, Alexandre Moreau & Vissarut Ly.</p>

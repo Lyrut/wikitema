@@ -1,11 +1,11 @@
 <div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
     <div>
         <div class="uk-tile uk-tile-muted uk-padding-remove">
-            <p class="uk-h4">Liste des thèmes</p>
+            <p class="uk-h4">Liste des thématiques</p>
         </div>
     </div>
 <a class="uk-button" href="<?= $this->url('add.themes'); ?>">
-     Nouveau Thème
+     Nouvelle thématique
 </a>
 </p>
 
@@ -16,15 +16,15 @@
         <th>Name</th>
         <th>Action</th>
     </tr>
-    
+
     <?php foreach ($themes as $theme): ?>
-    
+
     <tr>
         <td><?= $this->escapeHtml($theme->getId()); ?></td>
         <td>
             <a href="<?= $this->url('view.themes', ['id'=>$theme->getId()]); ?>">
                 <?= $this->escapeHtml($theme->getName()); ?>
-            </a> 
+            </a>
         </td>
         <td><a href="<?= $this->url('edit.themes', ['id'=>$theme->getId()]); ?>">
                 <?= $this->escapeHtml('Edit'); ?>
@@ -32,4 +32,3 @@
     </tr>
     <?php endforeach; ?>
 </table>
-

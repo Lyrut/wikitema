@@ -42,12 +42,18 @@ $form->prepare();
 </div>
 
 <?php foreach ($commentaires as $commentaire) : ?>
-<div class="uk-grid-match uk-grid-small">
-    <div class="uk-text-justify uk-grid-item-match">
-        <div>
-            <h4 class="uk-heading-divider">Commentaire de <?= $this->escapeHtml($commentaire->getUser()->getFullName()) ?> datée du <?= $this->escapeHtml($commentaire->getDate_created()) ?></h4>
-            <?= $commentaire->getText() ?>
+<hr>
+<article class="uk-comment uk-comment-primary">
+    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+        <div class="uk-width-expand">
+            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?= $this->escapeHtml($commentaire->getUser()->getFullName()) ?></a></h4>
+            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                <li><a href="#"><?= $this->escapeHtml($commentaire->getDate_created()) ?></a></li>
+            </ul>
         </div>
-   </div>
-</div>
+    </header>
+    <div class="uk-comment-body">
+        <p><?= $commentaire->getText() ?></p>
+    </div>
+</article>
 <?php endforeach; ?>
