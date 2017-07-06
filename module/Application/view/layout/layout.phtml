@@ -13,12 +13,16 @@
         <!-- Le styles -->
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
+            ->prependStylesheet($this->basePath('css/content-tools.min.css'))
             ->prependStylesheet($this->basePath('css/uikit.min.css'))
             ->prependStylesheet($this->basePath('css/uikit-rtl.min.css'))
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
+        ->prependFile($this->basePath('js/editor.js'))
+        ->prependFile($this->basePath('js/tinymce/tinymce.min.js'))
+        ->prependFile($this->basePath('js/content-tools.min.js'))
         ->prependFile($this->basePath('js/uikit-icons.min.js'))
         ->prependFile($this->basePath('js/uikit.min.js'))
         ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
@@ -31,6 +35,10 @@
                 <div class="uk-offcanvas-bar">
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
                     <a class="uk-navbar-item" href="<?= $this->url('home') ?>">Accueil</a>
+                    <?php if($user != null && $user->getRole()) : ?>
+                        <a class="uk-navbar-item" href="<?= $this->url('add.articles') ?>">Ajouter un article</a>
+                        <a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a>
+                    <?php endif; ?>
                     <a class="uk-navbar-item" href="<?= $this->url('connexion') ?>">Se connecter</a>
                 </div>
             </div>
@@ -41,6 +49,7 @@
                     <li><a class="uk-navbar-item uk-logo" href="#">Wikitema</a></li>
                     <li class="uk-active uk-visible@l"><a href="<?= $this->url('home') ?>">Accueil</a></li>
                     <?php if($user != null && $user->getRole()) : ?>
+                        <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
                     <?php endif; ?>
                 </ul>
@@ -64,7 +73,9 @@
         </nav>
         <div class="uk-section uk-section-default">
             <div class="uk-container uk-position-relative">
-                <?= $this->content ?>
+                <div data-editable data-name="main-content">
+                    <?= $this->content ?>
+                </div>
             </div>
         </div>
         <footer class="uk-modal-footer">

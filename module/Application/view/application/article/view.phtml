@@ -1,90 +1,10 @@
 <div class="uk-grid-match uk-grid-small" uk-grid>
-    <div class="uk-width-2-3@m uk-width-2-3@l uk-text-justify uk-grid-item-match">
+    <div class="uk-text-justify uk-grid-item-match">
         <div>
-            <h1 class="uk-heading-divider">Youtube</h1>
-            YouTube est un site web d’hébergement de vidéos sur lequel les utilisateurs peuvent envoyer, évaluer, regarder, commenter et partager des vidéos. Il a été créé en février 2005 par Steve Chen, Chad Hurley et Jawed Karim, trois anciens employés de PayPal et racheté par Google en octobre 2006 pour la somme de 1,65 milliard de dollars. Le service est situé à San Bruno, en Californie.
+            <h1 class="uk-heading-divider"><?= $article->getTitle() ?></h1>
 
-            En 2009, environ 350 millions de personnes visitent chaque mois ce site de partage de vidéos. En février 2017, YouTube annonce avoir franchi le cap du milliard d'heures de vidéos vues quotidiennement. Le 28 octobre 2010, l'ensemble des chaînes de YouTube atteint le milliard d'abonnés. En décembre 2016, la chaîne Youtube comptant le plus d'abonnés est celle de PewDiePie (plus de 50 millions en décembre 2016) et la vidéo la plus vue est Gangnam Style de Psy, postée en 2012, avec un total de plus de 2,8 milliards de consultations.
 
-            <div class="uk-width-1-3@m uk-width-1-3@l uk-card uk-small uk-card-default">
-                Sommaire
-            </div>
-        </div>
-    </div>
-
-    <div class="uk-width-1-3@m uk-width-1-3@l uk-card uk-card-small uk-card-default uk-card-hover">
-        <div class="uk-card-header">
-            <h3 class="uk-card-title uk-tile uk-tile-primary uk-padding-small">YouTube, LLC</h3>
-            Image illustrative de l'article YouTube
-        </div>
-        <div class="uk-card-body uk-overflow-auto">
-            <table class="uk-table uk-table-small">
-                <tbody>
-                    <tr>
-                        <th>Création</th>
-                        <td>14 février 2005</td>
-                    </tr>
-                    <tr>
-                        <th>Dates clés</th>
-                        <td>9 octobre 2006 : rachat par Google</td>
-                    </tr>
-                    <tr>
-                        <th>Fondateurs</th>
-                        <td>Steve Chen, Chad Hurley et Jawed Karim</td>
-                    </tr>
-                    <tr>
-                        <th>Forme juridique</th>
-                        <td>LLC, propriété de Google</td>
-                    </tr>
-                    <tr>
-                        <th>Slogan</th>
-                        <td>Broadcast Yourself (2005-2012)</td>
-                    </tr>
-                    <tr>
-                        <th>Siège social</th>
-                        <td>901 Cherry Ave 901 Cherry Ave. San Bruno, Californie 94066</td>
-                    </tr>
-                    <tr>
-                        <th>Direction</th>
-                        <td>Susan Wojcicki</td>
-                    </tr>
-                    <tr>
-                        <th>Actionnaires</th>
-                        <td>Google</td>
-                    </tr>
-                    <tr>
-                        <th>Activité</th>
-                        <td>Internet</td>
-                    </tr>
-                    <tr>
-                        <th>Produits</th>
-                        <td>Hébergeur de vidéo en ligne</td>
-                    </tr>
-                    <tr>
-                        <th>Société mère</th>
-                        <td>Alphabet Inc. (Google) depuis 2006</td>
-                    </tr>
-                    <tr>
-                        <th>Effectif</th>
-                        <td>121 (2014)</td>
-                    </tr>
-                    <tr>
-                        <th>Site web</th>
-                        <td>YouTube.com</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="uk-card-footer uk-overflow-auto">
-            <table class="uk-table uk-table-small">
-                <tbody>
-                    <tr>
-                        <th>Fonds propres</th>
-                        <td>6 700 000 USD</td>
-                    </tr>
-                </tbody>
-            </table>
+            <?= $article->getText() ?>
         </div>
     </div>
 </div>

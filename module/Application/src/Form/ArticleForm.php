@@ -75,7 +75,7 @@ class ArticleForm extends Form {
             'type' => 'Zend\Form\Element\Select',
             'name' => 'theme',
             'options' => [
-                    'label' => 'Select Theme',
+                    'label' => 'Sélectionner le thème',
                     'value_options' => $themes
                 ],
         ));
@@ -85,7 +85,7 @@ class ArticleForm extends Form {
             'type' => 'submit',
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Create'
+                'value' => 'Créer'
             ],
         ]);
     }

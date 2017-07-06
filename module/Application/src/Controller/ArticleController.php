@@ -75,8 +75,8 @@ class ArticleController extends AbstractActionController {
                 // Redirect to "view" page
                 return $this->redirect()->toRoute('view.articles', ['id' => $article->getId()]);
             }
-        }
 
+        }
         return new ViewModel([
             'form' => $form
         ]);
@@ -87,7 +87,7 @@ class ArticleController extends AbstractActionController {
         // Create new Article entity.
         $article = new Article();
         $article->setTitle($data['title']);
-        $article->setText($data['text']);        
+        $article->setText($data['text']);
         $article->setTheme($this->getAndVerifyTheme($data['theme']));
 
         $currentDate = date('Y-m-d H:i:s');
@@ -104,18 +104,18 @@ class ArticleController extends AbstractActionController {
 
         return $article;
     }
-    
+
     public function viewAction()
     {
         $id = (int) $this->params()->fromRoute('id', -1);
-        
+
         $article = $this->getAndVerifyArticle($id);
-        
+
         return new viewModel([
             'article' => $article
         ]);
     }
-    
+
     private function getAndVerifyTheme($id)
     {
         if ($id < 1) {
@@ -128,13 +128,13 @@ class ArticleController extends AbstractActionController {
                 ->find($id);
 
         if ($theme == null) {
-            $this->flashMessenger()->addErrorMessage("le theme n'est pas correcte");
+            $this->flashMessenger()->addErrorMessage("le thème n'est pas correcte");
             $this->redirect()->toRoute('add.articles');
         }
-        
+
         return $theme;
     }
-    
+
     private function getAndVerifyUser($id)
     {
         if ($id < 1) {
@@ -150,10 +150,10 @@ class ArticleController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Problème avec l'utilisateur connecté");
             $this->redirect()->toRoute('add.articles');
         }
-        
+
         return $user;
     }
-    
+
     private function getAndVerifyArticle($id)
     {
         if ($id < 1) {
@@ -169,7 +169,7 @@ class ArticleController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("L'utilisateur n'existe pas");
             $this->redirect()->toRoute('index.articles');
         }
-        
+
         return $article;
     }
 
