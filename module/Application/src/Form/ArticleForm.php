@@ -67,7 +67,7 @@ class ArticleForm extends Form {
             'type' => 'textarea',
             'name' => 'text',
             'options' => [
-                'label' => 'Texte',
+                'label' => 'Contenu',
             ],
         ]);
 

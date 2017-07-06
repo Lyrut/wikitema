@@ -1,17 +1,17 @@
 <?php
 
 $form->get('email')->setAttributes([
-    'class'=>'uk-input', 
+    'class'=>'uk-input',
     'placeholder'=>'Mail'
     ]);
 
 $form->get('full_name')->setAttributes([
-    'class'=>'uk-input', 
+    'class'=>'uk-input',
     'placeholder'=>'Nom et Prénom'
     ]);
 
 $form->get('pseudo')->setAttributes([
-    'class'=>'uk-input', 
+    'class'=>'uk-input',
     'placeholder'=>'Pseudo'
     ]);
 
@@ -33,52 +33,62 @@ $form->get('submit')->setAttributes(['class'=>'uk-button']);
 
 $form->prepare();
 ?>
-<div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
-    <div>
-        <div class="uk-tile uk-tile-muted uk-padding-remove">
-            <p class="uk-h4">Inscription</p>
-        </div>
+<div class="uk-grid uk-grid-small" uk-grid>
+    <div class="uk-width-3-3@m uk-text-center">
+        <form method="post">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Inscription</legend>
+
+                <?= $this->formElement($form->get('csrf')); ?>
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                        <?= $this->formElement($form->get('email')); ?>
+                    </div>
+                    <?= $this->formElementErrors($form->get('email')); ?>
+                </div>
+            	<div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+            			<?= $this->formElement($form->get('full_name')); ?>
+            			<?= $this->formElementErrors($form->get('full_name')); ?>
+                    </div>
+                </div>
+            	<div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <?= $this->formElement($form->get('pseudo')); ?>
+                        <?= $this->formElementErrors($form->get('pseudo')); ?>
+                    </div>
+                </div>
+            	<div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <?= $this->formElement($form->get('password')); ?>
+                        <?= $this->formElementErrors($form->get('password')); ?>
+                    </div>
+                </div>
+            	<div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <?= $this->formElement($form->get('confirm_password')); ?>
+                        <?= $this->formElementErrors($form->get('confirm_password')); ?>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <?= $this->formElement($form->get('select_role')); ?>
+                        <?= $this->formElementErrors($form->get('select_role')); ?>
+                    </div>
+                </div>
+
+                <?= $this->formElement($form->get('submit')); ?>
+                <?= $this->form()->closeTag(); ?>
+
+            	<div class="uk-align-center">
+            		<div uk-form-custom="target: true"><input type="file"></div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>
-<form method="post" class="uk-form-stacked">
-<?= $this->formElement($form->get('csrf')); ?>
-	<div class="uk-align-center">
-        <div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: mail"></span>
-			<?= $this->formElement($form->get('email')); ?>
-			<?= $this->formElementErrors($form->get('email')); ?>
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: user"></span>
-			<?= $this->formElement($form->get('full_name')); ?>
-			<?= $this->formElementErrors($form->get('full_name')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: user"></span>
-			<?= $this->formElement($form->get('pseudo')); ?>
-			<?= $this->formElementErrors($form->get('pseudo')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-			<?= $this->formElement($form->get('password')); ?>
-			<?= $this->formElementErrors($form->get('password')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-			<?= $this->formElement($form->get('confirm_password')); ?>
-			<?= $this->formElementErrors($form->get('confirm_password')); ?> 
-        </div>
-        <div class="uk-align-left uk-inline">
-            <?= $this->formElement($form->get('select_role')); ?>
-            <?= $this->formElementErrors($form->get('select_role')); ?>                  
-        </div>
-        <?= $this->formElement($form->get('submit')); ?>
-        <?= $this->form()->closeTag(); ?>
-		<div class="uk-align-center">
-			<div uk-form-custom="target: true">
-			<input type="file">
-		</div>
-			<a class="uk-button uk-button-default">Retour</a>
-	</div>
-    </div>    
-</div>  

@@ -1,58 +1,54 @@
 <?php
 
 $form->get('email')->setAttributes([
-    'class'=>'uk-input', 
-    'placeholder'=>'Pseudo ou Mail',
+    'class'=>'uk-input',
+    'placeholder'=>'Mail',
     'required' => true,
     'autofocus' => true
     ]);
 
 $form->get('password')->setAttributes([
-    'class'=>'uk-input', 
+    'class'=>'uk-input',
     'placeholder'=>'Mot de passe',
     'required' => true,
     ]);
 ?>
-<div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
-    <div>
-        <div class="uk-tile uk-tile-muted uk-padding-remove">
-            <p class="uk-h4">Se connecter</p>
-        </div>
-    </div>
-</div>
-<form method="post">
-    <?= $this->formElement($form->get('csrf')); ?>
-	<div class="uk-align-left">
-        <div class="uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: user"></span>
-			<?= $this->formElement($form->get('email')); ?>
-        </div>
-		
-		<div class="uk-margin">
-        <div class="uk-inline">
-            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-			<?= $this->formElement($form->get('password')); ?>
-        </div>
-    </div>
-    </div>
-	<div class="uk-margin">
-		<div uk-form-custom="target: true">
-			<input type="file">
-        </div>
-        <button class="uk-button uk-button-default">Mot de passe oublié ?</button>
-	</div>
-	<div class="uk-align-left">
-		<div uk-form-custom="target: true">
-			<input type="file">
-        </div>
-        <input type="submit" class="uk-button uk-button-default" value="Valider">
-	</div>
-</form>
+<div class="uk-grid uk-grid-small uk-text-center">
+  <div class="uk-width-1-2">
+      <div>
+          <div class="uk-tile uk-tile-muted uk-padding-remove">
+              <p class="uk-h4">Se connecter</p>
+          </div>
+          <form method="post">
+            <?= $this->formElement($form->get('csrf')); ?>
+            <div class="uk-align-center">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <?= $this->formElement($form->get('email')); ?>
+                </div>
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                    <?= $this->formElement($form->get('password')); ?>
+                </div>
+            </div>
+            <div uk-form-custom="target: true">
+                <input type="file">
+            </div>
+            <input type="submit" class="uk-button uk-button-default uk-width-2-5" value="Valider">
 
-<div class="uk-align-right">
-	Pas de compte ?
-	<div uk-form-custom="target: true">
-		<input type="file">
-	</div>
-	<a href="<?= $this->url('add.users'); ?>" class="uk-button uk-button-default">Inscription</a>
+            <div uk-form-custom="target: true">
+      			<input type="file">
+            </div>
+            <input type="button" class="uk-button uk-button-default uk-width-2-5" value="Mot de passe oublié ?">
+          </form>
+      </div>
+  </div>
+
+  <div class="uk-width-1-2">
+      	Pas de compte ?
+      	<div uk-form-custom="target: true">
+      		<input type="file">
+      	</div>
+      	<a href="<?= $this->url('add.users'); ?>" class="uk-button uk-button-default">Inscription</a>
+  </div>
 </div>

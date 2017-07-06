@@ -34,6 +34,7 @@ class IndexController extends AbstractActionController
         
         $user = $this->identity();
         if($user == null) $this->redirect()->toRoute("connexion");
+        else $this->redirect()->toRoute("index.articles");
 
         return new ViewModel();
     }
