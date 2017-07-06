@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * This class represents a registered user.
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Authentification\Repository\UserRepository")
  * @ORM\Table(name="user")
  */
 class User 
