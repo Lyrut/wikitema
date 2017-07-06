@@ -140,7 +140,7 @@ class ArticleController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if(2 >= $user->getRole() && $article->getUser()->getId() != $user->getId())
+        if(2 < $user->getRole() && $article->getUser()->getId() != $user->getId())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
@@ -286,7 +286,7 @@ class ArticleController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if($level_of_access >= $user->getRole())
+        if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');

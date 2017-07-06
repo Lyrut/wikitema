@@ -31,6 +31,7 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
+        
         $user = $this->identity();
         if($user == null) $this->redirect()->toRoute("connexion");
 

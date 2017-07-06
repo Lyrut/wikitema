@@ -74,19 +74,27 @@ class UserController extends AbstractActionController {
         }
         
         $userAuth = $this->authService->getIdentity();
-        if(!$userAuth) {
+        if($userAuth == null) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if(1 >= $userAuth->getRole() && $user->getId() == $userAuth->getId())
+        if(1 == $userAuth->getRole())
         {
+            return new ViewModel([
+                'user' => $user
+            ]);
+        } elseif ($user->getId() == $userAuth->getId()) {
+            return new ViewModel([
+                'user' => $user
+            ]);
+        } else {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-
         return new ViewModel([
             'user' => $user
         ]);
+        
     }
 
     /**
@@ -95,7 +103,7 @@ class UserController extends AbstractActionController {
     public function addAction() {
         
         $user = $this->authService->getIdentity();
-        if(!$user || 1 >= $user->getRole())
+        if(!$user || 1 < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
@@ -166,7 +174,7 @@ class UserController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if($level_of_access >= $user->getRole())
+        if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');

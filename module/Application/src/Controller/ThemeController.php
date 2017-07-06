@@ -168,7 +168,7 @@ class ThemeController extends AbstractActionController
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if($level_of_access >= $user->getRole())
+        if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
