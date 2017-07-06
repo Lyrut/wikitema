@@ -144,6 +144,16 @@ return [
                     ],
                 ],
             ],
+            'edit.articles' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/article/edit[/:id]',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'edit',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

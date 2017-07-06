@@ -121,7 +121,57 @@ class ArticleController extends AbstractActionController {
             'creatorOfArticle' => $user
         ]);
     }
+    
+    public function editAction() {
+        $themes = $this->entityManager->getRepository(Theme::class)
+                ->findBy([], ['id' => 'ASC']);
+        $t = [];
+        foreach ($themes as $data) {
+            $t[$data->getId()] = $data->getName();
+        }
+        $id = (int) $this->params()->fromRoute('id', -1);
+        $article = $this->getAndVerifyArticle($id);
+        // Create user form
+        $form = new ArticleForm($t, $this->entityManager, $article);
 
+        // Check if user has submitted the form
+        if ($this->getRequest()->isPost()) {
+
+            // Fill in the form with POST data
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid()) {
+
+                // Get filtered and validated data
+                $data = $form->getData();
+
+                
+                $article->setTitle($data['title']);
+                $article->setText($data['text']);
+                $article->setTheme($this->getAndVerifyTheme($data['theme']));
+                
+                 $this->entityManager->flush();
+
+                // Redirect to "view" page
+                return $this->redirect()->toRoute('view.articles', ['id' => $article->getId()]);
+            }
+
+        }else{
+            $form->setData(array(
+                    'title'=>$article->getTitle(),
+                    'text'=>$article->getText(),
+                    'theme'=>$article->getTheme()->getId(),
+                ));
+        }
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
+    
+    
     private function getAndVerifyTheme($id)
     {
         if ($id < 1) {
