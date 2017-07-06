@@ -154,6 +154,16 @@ return [
                     ],
                 ],
             ],
+            'liste.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/list',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'liste',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

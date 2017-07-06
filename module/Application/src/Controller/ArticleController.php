@@ -191,6 +191,18 @@ class ArticleController extends AbstractActionController {
             'form' => $form
         ]);
     }
+    
+    public function listeAction(){
+        // Find a user with such ID.
+        $user = $this->authService->getIdentity()->getId();
+
+        $articles = $this->entityManager->getRepository(Article::class)
+                ->getArticlesByUser($user);
+        
+        return new ViewModel([
+            'article' => $articles
+        ]);   
+    }
 
 
     private function getAndVerifyTheme($id)
