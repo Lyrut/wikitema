@@ -37,6 +37,9 @@ class ArticleController extends AbstractActionController {
     }
 
     public function indexAction() {
+
+        $this->verifyRoleForUser(3);
+
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getLastArticles();
 
@@ -46,6 +49,9 @@ class ArticleController extends AbstractActionController {
     }
 
     public function addAction() {
+
+        $this->verifyRoleForUser(2);
+
         $themes = $this->entityManager->getRepository(Theme::class)
                 ->findBy([], ['id' => 'ASC']);
         $t = [];
@@ -85,6 +91,7 @@ class ArticleController extends AbstractActionController {
 
     private function addArticle($data) {
 
+        $this->verifyRoleForUser(2);
         // Create new Article entity.
         $article = new Article();
         $article->setTitle($data['title']);
@@ -108,6 +115,7 @@ class ArticleController extends AbstractActionController {
 
     public function viewAction()
     {
+        $this->verifyRoleForUser(3);
         $id = (int) $this->params()->fromRoute('id', -1);
 
         $article = $this->getAndVerifyArticle($id);
@@ -121,6 +129,69 @@ class ArticleController extends AbstractActionController {
             'creatorOfArticle' => $user
         ]);
     }
+
+    public function editAction() {
+
+        $id = (int) $this->params()->fromRoute('id', -1);
+        $article = $this->getAndVerifyArticle($id);
+
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if(2 >= $user->getRole() && $article->getUser()->getId() != $user->getId())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+
+        $themes = $this->entityManager->getRepository(Theme::class)
+                ->findBy([], ['id' => 'ASC']);
+        $t = [];
+        foreach ($themes as $data) {
+            $t[$data->getId()] = $data->getName();
+        }
+        // Create user form
+        $form = new ArticleForm($t, $this->entityManager, $article);
+
+        // Check if user has submitted the form
+        if ($this->getRequest()->isPost()) {
+
+            // Fill in the form with POST data
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid()) {
+
+                // Get filtered and validated data
+                $data = $form->getData();
+
+
+                $article->setTitle($data['title']);
+                $article->setText($data['text']);
+                $article->setTheme($this->getAndVerifyTheme($data['theme']));
+
+                 $this->entityManager->flush();
+
+                // Redirect to "view" page
+                return $this->redirect()->toRoute('view.articles', ['id' => $article->getId()]);
+            }
+
+        }else{
+            $form->setData(array(
+                    'title'=>$article->getTitle(),
+                    'text'=>$article->getText(),
+                    'theme'=>$article->getTheme()->getId(),
+                ));
+        }
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
+
 
     private function getAndVerifyTheme($id)
     {
@@ -181,7 +252,7 @@ class ArticleController extends AbstractActionController {
 
     public function listJsonAction()
     {
-
+        //$this->verifyRoleForUser(3);
         $articles = $this->entityManager->getRepository(Article::class)->getAllArticles();
 
         $list = [];
@@ -194,6 +265,7 @@ class ArticleController extends AbstractActionController {
 
     public function redirectAutocompleteAction()
     {
+        $this->verifyRoleForUser(3);
         $article_title = $this->params()->fromQuery('title');
 
         //$article = $this->entityManager->getRepository(Article::class)->findOneByTitle($article_title);
@@ -205,6 +277,20 @@ class ArticleController extends AbstractActionController {
         }
 
         $this->redirect()->toRoute('view.articles', ['id'=>$article[0]->getId()]);
+    }
+
+    private function verifyRoleForUser($level_of_access)
+    {
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if($level_of_access >= $user->getRole())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
     }
 
 }

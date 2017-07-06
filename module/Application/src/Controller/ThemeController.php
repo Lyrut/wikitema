@@ -36,6 +36,7 @@ class ThemeController extends AbstractActionController
     
     public function indexAction()
     {
+        $this->verifyRoleForUser(1);
         $themes = $this->entityManager->getRepository(Theme::class)
                 ->findBy([], ['id' => 'ASC']);
 
@@ -46,6 +47,7 @@ class ThemeController extends AbstractActionController
     
     public function viewAction()
     {
+        $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
         
         $theme = $this->getAndVerifyTheme($id);
@@ -57,6 +59,7 @@ class ThemeController extends AbstractActionController
     
     public function addAction()
     {
+        $this->verifyRoleForUser(1);
         $form = new ThemeForm($this->entityManager);
 
         if ($this->getRequest()->isPost()) {
@@ -88,6 +91,7 @@ class ThemeController extends AbstractActionController
     
     public function deleteAction()
     {
+        $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
         
         $theme = $this->getAndVerifyTheme($id);
@@ -103,6 +107,7 @@ class ThemeController extends AbstractActionController
     
     public function editAction()
     {
+        $this->verifyRoleForUser(1);
         $id = (int) $this->params()->fromRoute('id', -1);
         
         $theme = $this->getAndVerifyTheme($id);
@@ -154,5 +159,19 @@ class ThemeController extends AbstractActionController
         }
         
         return $theme;
+    }
+    
+    private function verifyRoleForUser($level_of_access)
+    {
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if($level_of_access >= $user->getRole())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
     }
 }

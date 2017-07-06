@@ -13,6 +13,12 @@ use Zend\View\Model\ViewModel;
 class UserController extends AbstractActionController {
 
     /**
+     * Authentication service.
+     * @var AuthenticationService
+     */
+    private $authService;
+    
+    /**
      * Entity manager.
      * @var EntityManager
      */
@@ -21,8 +27,10 @@ class UserController extends AbstractActionController {
     /**
      * Constructor. 
      */
-    public function __construct($entityManager) {
+    public function __construct($entityManager, $authService, $sessionManager) {
         $this->entityManager = $entityManager;
+        $this->authService = $authService;
+        $this->sessionManager = $sessionManager;
     }
 
     private function checkIfUserExists($email) {
@@ -38,6 +46,8 @@ class UserController extends AbstractActionController {
      * list of users.
      */
     public function indexAction() {
+        $this->verifyRoleForUser(1);
+        
         $users = $this->entityManager->getRepository(User::class)
                 ->findBy([], ['id' => 'ASC']);
 
@@ -47,6 +57,7 @@ class UserController extends AbstractActionController {
     }
 
     public function viewAction() {
+        
         $id = (int) $this->params()->fromRoute('id', -1);
         if ($id < 1) {
             $this->flashMessenger()->addErrorMessage("l'id distribué n'est pas correcte");
@@ -61,6 +72,17 @@ class UserController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("l'utilisateur n'existe pas");
             $this->redirect()->toRoute('list.users');
         }
+        
+        $userAuth = $this->authService->getIdentity();
+        if(!$userAuth) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if(1 >= $userAuth->getRole() && $user->getId() == $userAuth->getId())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
 
         return new ViewModel([
             'user' => $user
@@ -71,6 +93,13 @@ class UserController extends AbstractActionController {
      * This action displays a page allowing to add a new user.
      */
     public function addAction() {
+        
+        $user = $this->authService->getIdentity();
+        if(!$user || 1 >= $user->getRole())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
         // Create user form
         $form = new UserForm('create', $this->entityManager);
 
@@ -128,6 +157,20 @@ class UserController extends AbstractActionController {
         $this->entityManager->flush();
 
         return $user;
+    }
+    
+    private function verifyRoleForUser($level_of_access)
+    {
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if($level_of_access >= $user->getRole())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
     }
 
 }
