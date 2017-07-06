@@ -237,7 +237,10 @@ class ArticleController extends AbstractActionController {
         ]);
     }
     
-    public function listeAction(){
+    public function listofuserAction(){
+        
+        $this->verifyRoleForUser(2);
+        
         // Find a user with such ID.
         $user = $this->authService->getIdentity()->getId();
 
@@ -245,7 +248,7 @@ class ArticleController extends AbstractActionController {
                 ->getArticlesByUser($user);
         
         return new ViewModel([
-            'article' => $articles
+            'articles' => $articles
         ]);   
     }
 

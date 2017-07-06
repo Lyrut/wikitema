@@ -154,13 +154,13 @@ return [
                     ],
                 ],
             ],
-            'liste.articles' => [
+            'listofuser.articles' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/article/list',
+                    'route' => '/article/mylist',
                     'defaults' => [
                         'controller' => Controller\ArticleController::class,
-                        'action' => 'liste',
+                        'action' => 'listofuser',
                     ],
                 ],
             ],
