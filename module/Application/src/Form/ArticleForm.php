@@ -11,18 +11,18 @@ class ArticleForm extends Form {
 
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
+     * @var Doctrine\ORM\EntityManager
      */
     private $entityManager = null;
 
     /**
      * Current article.
-     * @var Application\Entity\Article 
+     * @var Application\Entity\Article
      */
     private $article = null;
 
     /**
-     * Constructor.     
+     * Constructor.
      */
     public function __construct($themes = [], $entityManager = null, $article = null) {
         // Define form name
@@ -43,7 +43,7 @@ class ArticleForm extends Form {
      * This method adds elements to form (input fields and submit button).
      */
     protected function addElements($themes) {
-        
+
         $this->add([
             'type' => 'csrf',
             'name' => 'csrf',
@@ -53,7 +53,7 @@ class ArticleForm extends Form {
                 ]
             ],
         ]);
-        
+
         $this->add([
             'type' => 'text',
             'name' => 'title',
@@ -61,16 +61,16 @@ class ArticleForm extends Form {
                 'label' => 'Titre',
             ],
         ]);
-        
-        
+
+
         $this->add([
-            'type' => 'text',
+            'type' => 'textarea',
             'name' => 'text',
             'options' => [
                 'label' => 'Texte',
             ],
         ]);
-        
+
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
             'name' => 'theme',
@@ -92,7 +92,7 @@ class ArticleForm extends Form {
 
     /**
      * This method creates input filter (used for form filtering/validation).
-    
+
     private function addInputFilter() {
         // Create main input filter
         $inputFilter = new InputFilter();
@@ -122,7 +122,7 @@ class ArticleForm extends Form {
                 ],
             ],
         ]);
-        
+
         if ($this->scenario == 'create') {
 
             // Add input for "password" field
@@ -161,5 +161,3 @@ class ArticleForm extends Form {
     } */
 
 }
-
-
