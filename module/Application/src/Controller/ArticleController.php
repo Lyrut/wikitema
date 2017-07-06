@@ -37,6 +37,9 @@ class ArticleController extends AbstractActionController {
     }
 
     public function indexAction() {
+        
+        $this->verifyRoleForUser(3);
+        
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getLastArticles();
 
@@ -46,6 +49,9 @@ class ArticleController extends AbstractActionController {
     }
 
     public function addAction() {
+        
+        $this->verifyRoleForUser(2);
+        
         $themes = $this->entityManager->getRepository(Theme::class)
                 ->findBy([], ['id' => 'ASC']);
         $t = [];
@@ -85,6 +91,7 @@ class ArticleController extends AbstractActionController {
 
     private function addArticle($data) {
 
+        $this->verifyRoleForUser(2);
         // Create new Article entity.
         $article = new Article();
         $article->setTitle($data['title']);
@@ -108,6 +115,7 @@ class ArticleController extends AbstractActionController {
 
     public function viewAction()
     {
+        $this->verifyRoleForUser(3);
         $id = (int) $this->params()->fromRoute('id', -1);
 
         $article = $this->getAndVerifyArticle($id);
@@ -231,7 +239,7 @@ class ArticleController extends AbstractActionController {
     
     public function listJsonAction()
     {
-        
+        $this->verifyRoleForUser(3);
         $articles = $this->entityManager->getRepository(Article::class)->getAllArticles();
         
         $list = [];
@@ -244,6 +252,7 @@ class ArticleController extends AbstractActionController {
     
     public function redirectAutocompleteAction()
     {
+        $this->verifyRoleForUser(3);
         $article_title = $this->params()->fromQuery('title');
         
         //$article = $this->entityManager->getRepository(Article::class)->findOneByTitle($article_title);
@@ -255,6 +264,20 @@ class ArticleController extends AbstractActionController {
         }
         
         $this->redirect()->toRoute('view.articles', ['id'=>$article[0]->getId()]);
+    }
+    
+    private function verifyRoleForUser($level_of_access)
+    {
+        $user = $this->authService->getIdentity();
+        if(!$user) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        if($level_of_access >= $user->getRole())
+        {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
     }
 
 }
