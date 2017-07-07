@@ -64,6 +64,7 @@
                 <div class="uk-offcanvas-bar">
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
                     <ul class="uk-nav uk-nav-default">
+                        <li><a href="<?= $this->url('view.users', array('id'=>$user->getId())) ?>"><?= $user->getFullName() ?></a></li>
                         <li class="uk-active"><a href="<?= $this->url('home') ?>">Accueil</a></li>
                         <?php if($user != null) : // Vérifie si la variable de l'utilisateur n'est pas vide ?>
                             <?php if($user->getRole() == 1) : // Si l'utilisateur est un Admin ?>
