@@ -169,7 +169,7 @@ class ArticleController extends AbstractActionController {
 
                 // Apply changes to database.
                 $this->entityManager->flush();
-                
+
                 $this->flashMessenger()->addSuccessMessage('Commentaire ajouté');
             }
         }
@@ -273,16 +273,22 @@ class ArticleController extends AbstractActionController {
             'articles' => $articles
         ]);
     }
-    
+
     public function listAction(){
-        $this->verifyRoleForUser(1);
-        
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getAllArticles();
-        
+
+        foreach($articles as $article)
+        {
+            // Récupère les données de l'utilisateur
+            $idUserArticle = $article->getUser()->getId();
+            $user = $this->entityManager->getRepository(User::class)->find($idUserArticle);
+            $article->setUser($user);
+        }
+
         return new ViewModel([
             'articles' => $articles
-        ]);   
+        ]);
     }
 
 
@@ -304,8 +310,8 @@ class ArticleController extends AbstractActionController {
 
         return $theme;
     }
-    
-    
+
+
 
     private function getAndVerifyUser($id)
     {
@@ -367,11 +373,15 @@ class ArticleController extends AbstractActionController {
         $article = $this->entityManager->getRepository(Article::class)->getArticleByTitle($article_title);
 
         if (!$article) {
-            $this->flashMessenger()->addErrorMessage("L'utilisateur n'existe pas");
+            $this->flashMessenger()->addErrorMessage("L'article n'existe pas");
             $this->redirect()->toRoute('index.articles');
         }
-
-        $this->redirect()->toRoute('view.articles', ['id'=>$article[0]->getId()]);
+        if(isset($article[0])){
+            $this->redirect()->toRoute('view.articles', ['id'=>$article[0]->getId()]);
+        }
+        else {
+            $this->redirect()->toRoute('home');
+        }
     }
 
     private function verifyRoleForUser($level_of_access)

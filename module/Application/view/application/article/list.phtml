@@ -3,7 +3,7 @@
         <h1 class="uk-heading-divider">Modifier un article</h1>
         <?php
             foreach($articles as $article) {
-                echo "<div class='uk-margin'><a href='".$this->url("edit.articles", array("id"=>$article->getId()))."'>".$article->getTitle()."</a></div>";
+                echo "<div class='uk-margin'><a href='".$this->url("view.articles", array("id"=>$article->getId()))."'>".$article->getTitle()."</a></div>";
             }
         ?>
     </div>

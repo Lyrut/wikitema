@@ -15,7 +15,17 @@ $form->prepare();
 <div class="uk-grid-match uk-grid-small" uk-grid>
     <div class="uk-text-justify uk-grid-item-match">
         <div>
-            <h1 class="uk-heading-divider"><?= $article->getTitle() ?></h1>
+            <h1 class="uk-heading-divider"><?= $article->getTitle() ?>
+                <?php
+                    if($article->getUser()->getRole() == 1 || $this->identity()->getRole() == $creatorOfArticle->getId()) {
+                        echo "
+                        <span class='uk-align-right'>
+                            <a class='uk-button uk-button-default' href='".$this->url('edit.articles', array('id'=>$article->getId()))."'>Modifier</a>
+                        </span>";
+                    }
+                ?>
+            </h1>
+
             <?= $article->getText() ?>
         </div>
     </div>

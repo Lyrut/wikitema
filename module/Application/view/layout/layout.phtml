@@ -82,7 +82,13 @@
                                             <li><a href="<?= $this->url('add.themes') ?>">Ajouter une thématique</a></li>
                                     </ul>
                                 </li>
-                                <li><a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
+                                <li class="uk-parent">
+                                    <a href="#">Utilisateurs</a>
+                                    <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
+                                        <li><a href="<?= $this->url('add.users') ?>">Ajouter un utilisateur</a></li>
+                                    </ul>
+                                </li>
                             <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
                                 <li class="uk-parent">
                                     <a href="<?= $this->url('index.articles') ?>">Articles</a>
@@ -127,7 +133,15 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
+                            <li>
+                                <a class="uk-visible@l" href="#">Utilisateurs</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
+                                        <li><a href="<?= $this->url('add.users') ?>">Ajouter un utilisateur</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
                             <li class="uk-visible@l">
                                 <a href="<?= $this->url('index.articles') ?>">Articles</a>
