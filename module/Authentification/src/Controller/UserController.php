@@ -108,8 +108,14 @@ class UserController extends AbstractActionController {
         
         
         // Create user form
-        $form = new UserForm('create', $this->entityManager);
-
+        if($user !=null && $user->getRole() == 1){
+            $roles = array(1 => 'administrateur',2 => 'auteur',3 => 'abonné');
+        }else{
+            $roles = array(2 => 'auteur',3 => 'abonné');
+        }
+        
+        $form = new UserForm('create', $this->entityManager,new User() ,$roles);
+        
         // Check if user has submitted the form
         if ($this->getRequest()->isPost()) {
 
