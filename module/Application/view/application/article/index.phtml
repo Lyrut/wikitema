@@ -1,1 +1,29 @@
+<div class="uk-grid-match uk-grid-small" uk-grid>
+    <div class="uk-width-1-2 uk-text-justify uk-grid-item-match">
+        <h1 class="uk-heading-divider">Derniers articles parus</h1>
+        <?php
+            foreach($articles as $article) {
+                echo "<div class='uk-margin'></div>";
 
+                echo "<article class='uk-article'>
+
+                    <h1 class='uk-article-title'><a class='uk-link-reset' href='".$this->url("view.articles", array("id"=>$article->getId()))."'>".$article->getTitle()."</a></h1>
+
+                    <p class='uk-article-meta'>Écrit par <a href=''>".$article->getUser()->getFullName()."</a> le ".$article->getDate_created().". <span class='uk-badge'>".$article->getTheme()->getName()."</span></p>
+
+                    <p>".substr($article->getText(), 0, 999)."</p>
+
+                    <div class='uk-grid-small uk-child-width-auto' uk-grid>
+                        <div>
+                            <a class='uk-button uk-button-text' href='".$this->url("view.articles", array("id"=>$article->getId()))."'>Read more</a>
+                        </div>
+                        <div>
+                            <a class='uk-button uk-button-text' href=''>".sizeof($commentaires[$article->getId()])." Commentaires</a>
+                        </div>
+                    </div>
+
+                </article>";
+            }
+        ?>
+    </div>
+</div>

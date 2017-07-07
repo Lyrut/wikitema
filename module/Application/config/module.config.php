@@ -144,6 +144,26 @@ return [
                     ],
                 ],
             ],
+            'edit.articles' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/article/edit[/:id]',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'edit',
+                    ],
+                ],
+            ],
+            'listofuser.articles' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/article/mylist',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action' => 'listofuser',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

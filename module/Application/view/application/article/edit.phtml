@@ -1,0 +1,52 @@
+<?php
+
+$form->get('title')->setAttributes([
+    'class'=>'uk-input uk-width-1-2'
+    ]);
+
+$form->get('theme')->setAttributes([
+    'class'=>'uk-select uk-width-1-2'
+    ]);
+
+$form->get('text')->setAttributes([
+    'class'=>'uk-textarea uk-width-1-2 article'
+    ]);
+
+$form->get('submit')->setAttributes([
+    'class'=>'uk-button uk-button-default'
+    ]);
+
+$form->prepare();
+?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Ajout d'un nouvel article</legend>
+
+                <?= $this->formElement($form->get('csrf')); ?>
+
+                <div class="uk-margin">
+                    <?= $this->formLabel($form->get('title')); ?> <br>
+                    <?= $this->formElement($form->get('title')); ?>
+                    <?= $this->formElementErrors($form->get('title')); ?>
+                </div>
+
+                <div class="uk-margin">
+                    <?= $this->formLabel($form->get('theme')); ?> <br>
+                    <?= $this->formElement($form->get('theme')); ?>
+                    <?= $this->formElementErrors($form->get('theme')); ?>
+                </div>
+
+                <div class="uk-margin">
+                    <?= $this->formLabel($form->get('text')); ?> <br>
+                    <?= $this->formElement($form->get('text')); ?>
+                    <?= $this->formElementErrors($form->get('text')); ?>
+                </div>
+
+                <?= $this->formElement($form->get('submit')); ?>
+            </fieldset>
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>
