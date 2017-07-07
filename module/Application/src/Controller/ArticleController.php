@@ -251,6 +251,17 @@ class ArticleController extends AbstractActionController {
             'articles' => $articles
         ]);   
     }
+    
+    public function listAction(){
+        $this->verifyRoleForUser(1);
+        
+        $articles = $this->entityManager->getRepository(Article::class)
+                ->getAllArticles();
+        
+        return new ViewModel([
+            'articles' => $articles
+        ]);   
+    }
 
 
     private function getAndVerifyTheme($id)
@@ -271,6 +282,8 @@ class ArticleController extends AbstractActionController {
 
         return $theme;
     }
+    
+    
 
     private function getAndVerifyUser($id)
     {
