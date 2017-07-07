@@ -1,29 +1,30 @@
-<div class="uk-align-center">
-    <div class="uk-align-left uk-inline uk-card uk-card-small uk-card-default uk-card-hover">
-        <table class="uk-table">
-             <tr>
-                <th>ID:</th>
-                <td><?= $this->escapeHtml($theme->getId()) ?></td>
-            </tr>
-            <tr>
-                <th>Nom:</th>
-                <td><?= $this->escapeHtml($theme->getName()) ?></td>
-            </tr>
-        </table>
+<div class="uk-grid uk-grid-small uk-text-center" uk-grid>
+    <div class="uk-width-2-3">
+        <div class="uk-align-left">
+            <table class="uk-table">
+                <tbody>
+                    <tr>
+                        <th>ID:</th>
+                        <td><?= $this->escapeHtml($theme->getId()) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Nom:</th>
+                        <td><?= $this->escapeHtml($theme->getName()) ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-margin">
+			<a class="delete uk-button uk-button-danger" data-confirm="Voulez-vous supprimer cet élément ?" href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
+			    <?= $this->escapeHtml('Delete'); ?>
+		    </a>
+    	</div>
+    	<div class="uk-margin">
+            <a class="uk-button uk-button-default" href="<?= $this->url('list.themes'); ?>">
+                Retour
+            </a>
+    	</div>
     </div>
-<div class="uk-align-center">
-		<div class="uk-button uk-button-default">
-			<a class="delete" data-confirm="Voulez-vous supprimer cet élément ?" href="<?= $this->url('delete.themes', ['id'=>$theme->getId()]); ?>">
-			<?= $this->escapeHtml('Delete'); ?>
-		</a>
-		</div>
-	</div>
-	<div class="uk-align-center">
-			<div uk-form-custom="target: true">
-			<input type="file">
-			</div>
-			<a class="uk-button uk-button-default">Retour</a>
-	</div>
 </div>
 <script>
 var deleteLinks = document.querySelectorAll('.delete');

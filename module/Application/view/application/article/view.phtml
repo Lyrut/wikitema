@@ -1,7 +1,8 @@
 <?php
 
 $form->get('text')->setAttributes([
-    'class'=>'uk-input uk-width-1-2'
+    'class'=>'uk-input uk-width-1-2',
+    'id'=>'commentaire'
 ]);
 
 $form->get('submit')->setAttributes([
@@ -14,41 +15,46 @@ $form->prepare();
 <div class="uk-grid-match uk-grid-small" uk-grid>
     <div class="uk-text-justify uk-grid-item-match">
         <div>
-            <h1 class="uk-heading-divider"><?= $article->getTitle() ?> de <?= $creatorOfArticle->getFullName() ?></h1>
+            <h1 class="uk-heading-divider"><?= $article->getTitle() ?></h1>
             <?= $article->getText() ?>
         </div>
     </div>
 </div>
 
 
-<h2 class="uk-heading-divider">Comentaires </h2>
+<div class="uk-text-right">
+    Crée par <?= $creatorOfArticle->getFullName() ?>
+    le <?= $article->getDate_created() ?>
+</div>
+<h3 class="uk-heading-divider">Commentaires</h3>
 <div class="uk-grid-match uk-grid-small">
     <div class="uk-text-justify uk-grid-item-match">
         <?= $this->form()->openTag($form); ?>
-            <fieldset class="uk-fieldset">
-                <legend class="uk-legend">Ajout d'un nouveau commentaire</legend>
-
                 <?= $this->formElement($form->get('csrf')); ?>
 
                 <div class="uk-margin">
-                    <?= $this->formLabel($form->get('text')); ?> <br>
                     <?= $this->formElement($form->get('text')); ?>
                     <?= $this->formElementErrors($form->get('text')); ?>
                 </div>
 
                 <?= $this->formElement($form->get('submit')); ?>
-            </fieldset>
         <?= $this->form()->closeTag(); ?>
     </div>
 </div>
 
 <?php foreach ($commentaires as $commentaire) : ?>
-<div class="uk-grid-match uk-grid-small">
-    <div class="uk-text-justify uk-grid-item-match">
-        <div>
-            <h4 class="uk-heading-divider">Comentaire de <?= $this->escapeHtml($commentaire->getUser()->getFullName()) ?> datée du <?= $this->escapeHtml($commentaire->getDate_created()) ?></h4>
-            <?= $commentaire->getText() ?>
+<hr>
+<article class="uk-comment uk-comment-primary">
+    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+        <div class="uk-width-expand">
+            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?= $this->escapeHtml($commentaire->getUser()->getFullName()) ?></a></h4>
+            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                <li><a href="#"><?= $this->escapeHtml($commentaire->getDate_created()) ?></a></li>
+            </ul>
         </div>
-   </div>
-</div>
+    </header>
+    <div class="uk-comment-body">
+        <p><?= $commentaire->getText() ?></p>
+    </div>
+</article>
 <?php endforeach; ?>

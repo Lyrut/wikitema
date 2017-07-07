@@ -39,14 +39,32 @@ class ArticleController extends AbstractActionController {
     }
 
     public function indexAction() {
-
+        // Vérifie que l'utilisateur est un Abonné
         $this->verifyRoleForUser(3);
 
+        // Récupère les 3 derniers articles
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getLastArticles();
 
+        foreach($articles as $article)
+        {
+            // Récupère les données de l'utilisateur
+            $idUserArticle = $article->getUser()->getId();
+            $user = $this->entityManager->getRepository(User::class)->find($idUserArticle);
+            $article->setUser($user);
+
+            // Récupère les données des thématiques
+            $idThemeArticle = $article->getTheme()->getId();
+            $theme = $this->entityManager->getRepository(Theme::class)->find($idThemeArticle);
+            $article->setTheme($theme);
+
+            $commentaires[$article->getId()] = $this->entityManager->getRepository(Commentaire::class)
+                    ->getAllCommentairesByArticle($article->getId());
+        }
+
         return new ViewModel([
-            'articles' => $articles
+            'articles' => $articles,
+            'commentaires' => $commentaires
         ]);
     }
 
@@ -121,9 +139,9 @@ class ArticleController extends AbstractActionController {
         $id = (int) $this->params()->fromRoute('id', -1);
 
         $article = $this->getAndVerifyArticle($id);
-        
+
         $form = new CommentaireForm($this->entityManager);
-        
+
         if ($this->getRequest()->isPost()) {
 
             // Fill in the form with POST data
@@ -152,13 +170,13 @@ class ArticleController extends AbstractActionController {
                 $this->entityManager->flush();
             }
         }
-        
+
         $theme = $this->getAndVerifyTheme($article->getTheme()->getId());
         $userCreator = $this->getAndVerifyUser($article->getUser()->getId());
         $userCreator->setPassword('');
         $commentaires = $this->entityManager->getRepository(Commentaire::class)
                 ->getAllCommentairesByArticle($article->getId());
-        
+
         foreach($commentaires as $comment)
         {
             $idUserComen = $comment->getUser()->getId();
@@ -236,20 +254,20 @@ class ArticleController extends AbstractActionController {
             'form' => $form
         ]);
     }
-    
+
     public function listofuserAction(){
-        
+
         $this->verifyRoleForUser(2);
-        
+
         // Find a user with such ID.
         $user = $this->authService->getIdentity()->getId();
 
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getArticlesByUser($user);
-        
+
         return new ViewModel([
             'articles' => $articles
-        ]);   
+        ]);
     }
     
     public function listAction(){

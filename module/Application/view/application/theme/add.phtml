@@ -1,7 +1,6 @@
 <?php
-
 $form->get('name')->setAttributes([
-    'class'=>'uk-input', 
+    'class'=>'uk-input',
     'placeholder'=>'Nom'
     ]);
 
@@ -12,7 +11,7 @@ $form->prepare();
 <div class="uk-child-width-1-3@s uk-grid-small uk-text-center" uk-grid>
     <div>
         <div class="uk-tile uk-tile-muted uk-padding-remove">
-            <p class="uk-h4">Ajout d'un thème</p>
+            <p class="uk-h4">Ajout d'une thématique</p>
         </div>
     </div>
 </div>
@@ -28,9 +27,6 @@ $form->prepare();
         <?= $this->form()->closeTag(); ?>
     </div>
 	<div class="uk-align-center">
-			<div uk-form-custom="target: true">
-			<input type="file">
-			</div>
-			<a class="uk-button uk-button-default">Retour</a>
+		<a class="uk-button uk-button-default" href="<?= $this->url('list.themes'); ?>">Retour</a>
 	</div>
 </form>
