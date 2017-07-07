@@ -37,8 +37,11 @@ $form->prepare();
     <div class="uk-width-3-3@m uk-text-center">
         <form method="post">
             <fieldset class="uk-fieldset">
-                <legend class="uk-legend">Inscription</legend>
-
+                <?php if (!$user) : ?>
+                    <legend class="uk-legend">Inscription</legend>
+                <?php else : ?>
+                    <legend class="uk-legend">Ajout d'un utilisateur</legend>
+                <?php endif; ?>
                 <?= $this->formElement($form->get('csrf')); ?>
                 <div class="uk-margin">
                     <div class="uk-inline">
@@ -122,46 +125,3 @@ $form->prepare();
         </form>
     </div>
 </div>
-<form method="post" class="uk-form-stacked">
-<?= $this->formElement($form->get('csrf')); ?>
-	<div class="uk-align-center">
-        <div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: mail"></span>
-			<?= $this->formElement($form->get('email')); ?>
-			<?= $this->formElementErrors($form->get('email')); ?>
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: user"></span>
-			<?= $this->formElement($form->get('full_name')); ?>
-			<?= $this->formElementErrors($form->get('full_name')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon" uk-icon="icon: user"></span>
-			<?= $this->formElement($form->get('pseudo')); ?>
-			<?= $this->formElementErrors($form->get('pseudo')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-			<?= $this->formElement($form->get('password')); ?>
-			<?= $this->formElementErrors($form->get('password')); ?> 
-        </div>
-		<div class="uk-align-left uk-inline">
-            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-			<?= $this->formElement($form->get('confirm_password')); ?>
-			<?= $this->formElementErrors($form->get('confirm_password')); ?> 
-        </div>
-        <div class="uk-align-left uk-inline">
-            <?= $this->formElement($form->get('select_role')); ?>
-            <?= $this->formElementErrors($form->get('select_role')); ?>                  
-        </div>
-        <?= $this->formElement($form->get('submit')); ?>
-        <?= $this->form()->closeTag(); ?>
-		<div class="uk-align-center">
-			<div uk-form-custom="target: true">
-			<input type="file">
-		</div>
-			<a href="<?= $this->url('home'); ?>" class="uk-button uk-button-default">Retour</a>
-	</div>
-    </div>    
-</div>  
-

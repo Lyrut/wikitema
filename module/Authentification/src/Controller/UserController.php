@@ -78,13 +78,10 @@ class UserController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
-        if(1 == $userAuth->getRole())
+        if(1 == $userAuth->getRole() || $user->getId() == $userAuth->getId())
         {
             return new ViewModel([
-                'user' => $user
-            ]);
-        } elseif ($user->getId() == $userAuth->getId()) {
-            return new ViewModel([
+                'userAuth' => $userAuth,
                 'user' => $user
             ]);
         } else {
@@ -92,6 +89,7 @@ class UserController extends AbstractActionController {
             $this->redirect()->toRoute('connexion');
         }
         return new ViewModel([
+            'userAuth' => $userAuth,
             'user' => $user
         ]);
         
@@ -103,6 +101,12 @@ class UserController extends AbstractActionController {
     public function addAction() {
         
         $user = $this->authService->getIdentity();
+        if($user != null && $user->getRole() != 1) {
+            $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
+            $this->redirect()->toRoute('connexion');
+        }
+        
+        
         // Create user form
         $form = new UserForm('create', $this->entityManager);
 
@@ -134,6 +138,7 @@ class UserController extends AbstractActionController {
         }
 
         return new ViewModel([
+            'user' => $this->authService->getIdentity(),
             'form' => $form
         ]);
     }
