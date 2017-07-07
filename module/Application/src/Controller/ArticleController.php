@@ -100,6 +100,7 @@ class ArticleController extends AbstractActionController {
                 $article = $this->addArticle($data);
 
                 // Redirect to "view" page
+                $this->flashMessenger()->addSuccessMessage("Ajout de l'article reussie");
                 return $this->redirect()->toRoute('view.articles', ['id' => $article->getId()]);
             }
 
@@ -168,6 +169,8 @@ class ArticleController extends AbstractActionController {
 
                 // Apply changes to database.
                 $this->entityManager->flush();
+                
+                $this->flashMessenger()->addSuccessMessage('Commentaire ajouté');
             }
         }
 
@@ -240,6 +243,7 @@ class ArticleController extends AbstractActionController {
                  $this->entityManager->flush();
 
                 // Redirect to "view" page
+                 $this->flashMessenger()->addSuccessMessage("L'article a bien été édité");
                 return $this->redirect()->toRoute('view.articles', ['id' => $article->getId()]);
             }
 

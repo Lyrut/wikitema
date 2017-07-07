@@ -80,6 +80,7 @@ class ThemeController extends AbstractActionController
                 // Apply changes to database.
                 $this->entityManager->flush();
 
+                $this->flashMessenger()->addSuccessMessage("L'ajout du thème est une reussite");
                 return $this->redirect()->toRoute('view.themes', ['id' => $theme->getId()]);
             }
         }
@@ -101,6 +102,7 @@ class ThemeController extends AbstractActionController
         // Apply changes to database.
         $this->entityManager->flush();
 
+        $this->flashMessenger()->addSuccessMessage('Le thème a bien été supprimé');
         return $this->redirect()->toRoute('list.themes');
 
     }
@@ -129,6 +131,7 @@ class ThemeController extends AbstractActionController
                 // Apply changes to database.
                 $this->entityManager->flush();
 
+                $this->flashMessenger()->addSuccessMessage('Le thème a bien été édité');
                 return $this->redirect()->toRoute('list.themes');
             }
         } else {
