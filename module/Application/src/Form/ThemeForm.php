@@ -10,18 +10,18 @@ class ThemeForm extends Form {
 
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
+     * @var Doctrine\ORM\EntityManager
      */
     private $entityManager = null;
 
     /**
      * Current theme.
-     * @var Application\Entity\Theme 
+     * @var Application\Entity\Theme
      */
     private $theme = null;
 
     /**
-     * Constructor.     
+     * Constructor.
      */
     public function __construct($entityManager = null, $theme = null) {
         // Define form name
@@ -56,7 +56,7 @@ class ThemeForm extends Form {
             'type' => 'submit',
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Envoyer'
+                'value' => 'Ajouter'
             ],
         ]);
 
@@ -97,4 +97,3 @@ class ThemeForm extends Form {
     }
 
 }
-
