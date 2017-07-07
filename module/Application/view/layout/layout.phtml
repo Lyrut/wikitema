@@ -165,19 +165,25 @@
                 <div data-editable data-name="main-content">
                     <?php
                         $flash = $this->flashMessenger();
-                        $flash->setMessageOpenFormat('<div>
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                &times;
-                            </button>
-                            <ul><li>')
-                            ->setMessageSeparatorString('</li><li>')
-                            ->setMessageCloseString('</li></ul></div>');
+                        $flash->setMessageOpenFormat('<div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-danger uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render('error');
 
+                        $flash->setMessageOpenFormat('<div class="uk-alert-primary uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-primary uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render('info');
 
-                        echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
-                        echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
-                        echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
-                        echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+                        $flash->setMessageOpenFormat('<div class="uk-alert-warning uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-warning uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render('default');
+
+                        $flash->setMessageOpenFormat('<div class="uk-alert-success uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageSeparatorString('</p></div><div class="uk-alert-success uk-text-center" uk-alert><a class="uk-alert-close uk-text-right" uk-close></a><p>')
+                            ->setMessageCloseString('</p></div>')
+                            ->render('success');
                     ?>
                     <?= $this->content // Affichage de la page d'accueil par défaut ?>
                 </div>
