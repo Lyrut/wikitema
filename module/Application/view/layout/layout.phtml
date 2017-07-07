@@ -163,6 +163,22 @@
         <div class="uk-section uk-section-default">
             <div class="uk-container uk-position-relative">
                 <div data-editable data-name="main-content">
+                    <?php
+                        $flash = $this->flashMessenger();
+                        $flash->setMessageOpenFormat('<div>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                &times;
+                            </button>
+                            <ul><li>')
+                            ->setMessageSeparatorString('</li><li>')
+                            ->setMessageCloseString('</li></ul></div>');
+
+
+                        echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+                        echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+                        echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+                        echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+                    ?>
                     <?= $this->content // Affichage de la page d'accueil par défaut ?>
                 </div>
             </div>

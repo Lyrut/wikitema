@@ -1,4 +1,9 @@
 <div class="uk-align-center">
+    <?php if (1 == $userAuth->getRole() && $user->getId() != $userAuth->getId()) : ?>
+        <legend class="uk-legend">Compte de l'utilisateur <?= $this->escapeHtml($user->getFullName()) ?></legend>
+    <?php else : ?>
+        <legend class="uk-legend">Mon compte</legend>
+    <?php endif; ?>
     <div class="uk-align-left uk-inline uk-card uk-card-small uk-card-default uk-card-hover">
         <table class="uk-table">
              <tr>

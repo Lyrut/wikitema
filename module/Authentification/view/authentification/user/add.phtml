@@ -37,8 +37,11 @@ $form->prepare();
     <div class="uk-width-3-3@m uk-text-center">
         <form method="post">
             <fieldset class="uk-fieldset">
-                <legend class="uk-legend">Inscription</legend>
-
+                <?php if (!$user) : ?>
+                    <legend class="uk-legend">Inscription</legend>
+                <?php else : ?>
+                    <legend class="uk-legend">Ajout d'un utilisateur</legend>
+                <?php endif; ?>
                 <?= $this->formElement($form->get('csrf')); ?>
                 <div class="uk-margin">
                     <div class="uk-inline">
