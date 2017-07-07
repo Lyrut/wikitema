@@ -23,7 +23,8 @@ $form->prepare();
 
 
 <div class="uk-text-right">
-    Par <?= $creatorOfArticle->getFullName() ?>
+    Crée par <?= $creatorOfArticle->getFullName() ?>
+    le <?= $article->getDate_created() ?>
 </div>
 <h3 class="uk-heading-divider">Commentaires</h3>
 <div class="uk-grid-match uk-grid-small">

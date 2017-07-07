@@ -68,7 +68,7 @@
                         <?php if($user != null) : // Vérifie si la variable de l'utilisateur n'est pas vide ?>
                             <?php if($user->getRole() == 1) : // Si l'utilisateur est un Admin ?>
                                 <li class="uk-parent">
-                                    <a href="#">Articles</a>
+                                    <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                     <ul class="uk-nav-sub">
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
@@ -84,7 +84,7 @@
                                 <li><a class="uk-navbar-item" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
                             <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
                                 <li class="uk-parent">
-                                    <a href="#">Articles</a>
+                                    <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                     <ul class="uk-nav-sub">
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
@@ -109,7 +109,7 @@
                     <?php if($user != null) : ?>
                         <?php if($user->getRole() == 1) :  // Si l'utilisateur est un Admin ?>
                             <li class="uk-visible@l">
-                                <a href="#">Articles</a>
+                                <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
@@ -129,7 +129,7 @@
                             <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('list.users') ?>">Liste des utilisateurs</a></li>
                         <?php elseif($user->getRole() == 2) : // Si l'utilisateur est un Auteur ?>
                             <li class="uk-visible@l">
-                                <a href="#">Articles</a>
+                                <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
@@ -150,6 +150,7 @@
                                 <input id="search_article" class="uk-search-input" type="search" placeholder="Recherche...">
                             </form>
                         </div>
+                        <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('view.users', array('id'=>$user->getId())) ?>"><?= $user->getFullName() ?></a></li>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('deconnexion') ?>">Se déconnecter</a></li>
                     <?php else : ?>
                         <li><a class="uk-navbar-item uk-visible@l" href="<?= $this->url('connexion') ?>">Se connecter</a></li>
