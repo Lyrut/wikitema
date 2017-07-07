@@ -17,7 +17,7 @@ $form->prepare();
         <div>
             <h1 class="uk-heading-divider"><?= $article->getTitle() ?>
                 <?php
-                    if($article->getUser()->getRole() == 1 || $this->identity()->getRole() == $creatorOfArticle->getId()) {
+                    if($this->identity()->getRole() == 1 || $this->identity()->getRole() == $creatorOfArticle->getId()) {
                         echo "
                         <span class='uk-align-right'>
                             <a class='uk-button uk-button-default' href='".$this->url('edit.articles', array('id'=>$article->getId()))."'>Modifier</a>
