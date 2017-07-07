@@ -66,6 +66,7 @@ class AuthentificationController extends AbstractActionController {
                     $this->flashMessenger()->addSuccessMessage('Connexion Reussie');
                     $this->redirect()->toRoute('home');
                 } else {
+                    $this->flashMessenger()->addErrorMessage('Le mot de passe ne correspond pas');
                     $isLoginError = true;
                 }
             }

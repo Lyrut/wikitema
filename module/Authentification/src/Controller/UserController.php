@@ -60,7 +60,7 @@ class UserController extends AbstractActionController {
         
         $id = (int) $this->params()->fromRoute('id', -1);
         if ($id < 1) {
-            $this->flashMessenger()->addErrorMessage("l'id distribué n'est pas correcte");
+            $this->flashMessenger()->addErrorMessage("L'id distribué n'est pas correcte");
             $this->redirect()->toRoute('list.users');
         }
 
@@ -69,7 +69,7 @@ class UserController extends AbstractActionController {
                 ->find($id);
 
         if ($user == null) {
-            $this->flashMessenger()->addErrorMessage("l'utilisateur n'existe pas");
+            $this->flashMessenger()->addErrorMessage("L'utilisateur n'existe pas");
             $this->redirect()->toRoute('list.users');
         }
         
@@ -88,6 +88,7 @@ class UserController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
             $this->redirect()->toRoute('connexion');
         }
+        
         return new ViewModel([
             'userAuth' => $userAuth,
             'user' => $user
@@ -139,6 +140,7 @@ class UserController extends AbstractActionController {
                 $user = $this->addUser($data);
 
                 // Redirect to "view" page
+                $this->flashMessenger()->addSuccessMessage('Inscription effectuée');
                 return $this->redirect()->toRoute('view.users', ['id' => $user->getId()]);
             }
         }
