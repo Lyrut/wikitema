@@ -63,6 +63,7 @@ class AuthentificationController extends AbstractActionController {
 
                 if ($result->getCode() == Result::SUCCESS) {
                     $isLoginError = false;
+                    $this->flashMessenger()->addSuccessMessage('Connexion Reussie');
                     $this->redirect()->toRoute('home');
                 } else {
                     $isLoginError = true;
@@ -82,6 +83,7 @@ class AuthentificationController extends AbstractActionController {
         
         // Remove identity from session.
         $this->authService->clearIdentity();
+        $this->flashMessenger()->addSuccessMessage('Déconnexion Reussie');
         $this->redirect()->toRoute('connexion');
         return [];
     }
