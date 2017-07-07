@@ -204,12 +204,12 @@ class ArticleController extends AbstractActionController {
         $user = $this->authService->getIdentity();
         if(!$user) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
         if(2 < $user->getRole() && $article->getUser()->getId() != $user->getId())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
 
         $themes = $this->entityManager->getRepository(Theme::class)
@@ -396,12 +396,12 @@ class ArticleController extends AbstractActionController {
         $user = $this->authService->getIdentity();
         if(!$user) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
         if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
     }
 
