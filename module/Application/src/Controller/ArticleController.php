@@ -204,12 +204,12 @@ class ArticleController extends AbstractActionController {
         $user = $this->authService->getIdentity();
         if(!$user) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
         if(2 < $user->getRole() && $article->getUser()->getId() != $user->getId())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
 
         $themes = $this->entityManager->getRepository(Theme::class)
@@ -268,9 +268,26 @@ class ArticleController extends AbstractActionController {
 
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getArticlesByUser($user);
+        
+        foreach($articles as $article)
+        {
+            // Récupère les données de l'utilisateur
+            $idUserArticle = $article->getUser()->getId();
+            $user = $this->entityManager->getRepository(User::class)->find($idUserArticle);
+            $article->setUser($user);
+
+            // Récupère les données des thématiques
+            $idThemeArticle = $article->getTheme()->getId();
+            $theme = $this->entityManager->getRepository(Theme::class)->find($idThemeArticle);
+            $article->setTheme($theme);
+
+            $commentaires[$article->getId()] = $this->entityManager->getRepository(Commentaire::class)
+                    ->getAllCommentairesByArticle($article->getId());
+        }
 
         return new ViewModel([
-            'articles' => $articles
+            'articles' => $articles,
+            'commentaires' => $commentaires
         ]);
     }
 
@@ -389,12 +406,12 @@ class ArticleController extends AbstractActionController {
         $user = $this->authService->getIdentity();
         if(!$user) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
         if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
     }
 

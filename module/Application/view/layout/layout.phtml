@@ -64,13 +64,16 @@
                 <div class="uk-offcanvas-bar">
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
                     <ul class="uk-nav uk-nav-default">
+                        <?php if ($user != null) : ?>
                         <li><a href="<?= $this->url('view.users', array('id'=>$user->getId())) ?>"><?= $user->getFullName() ?></a></li>
+                        <?php endif; ?>
                         <li class="uk-active"><a href="<?= $this->url('home') ?>">Accueil</a></li>
                         <?php if($user != null) : // Vérifie si la variable de l'utilisateur n'est pas vide ?>
                             <?php if($user->getRole() == 1) : // Si l'utilisateur est un Admin ?>
                                 <li class="uk-parent">
                                     <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                     <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
                                     </ul>
@@ -93,8 +96,16 @@
                                 <li class="uk-parent">
                                     <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                     <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </li>
+                            <?php else : ?>
+                                <li class="uk-parent">
+                                    <a href="<?= $this->url('index.articles') ?>">Articles</a>
+                                    <ul class="uk-nav-sub">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                     </ul>
                                 </li>
                             <?php endif; ?>
@@ -119,6 +130,7 @@
                                 <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
                                     </ul>
@@ -147,8 +159,18 @@
                                 <a href="<?= $this->url('index.articles') ?>">Articles</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                         <li><a href="<?= $this->url('add.articles') ?>">Ajouter un article</a></li>
                                         <li><a href="<?= $this->url('listofuser.articles') ?>">Mes articles</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php else : ?>
+                            <li class="uk-visible@l">
+                                <a href="<?= $this->url('index.articles') ?>">Articles</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href="<?= $this->url('list.articles') ?>">Tous les articles</a></li>
                                     </ul>
                                 </div>
                             </li>

@@ -141,7 +141,7 @@ class UserController extends AbstractActionController {
 
                 // Redirect to "view" page
                 $this->flashMessenger()->addSuccessMessage('Inscription effectuée');
-                return $this->redirect()->toRoute('view.users', ['id' => $user->getId()]);
+                return $this->redirect()->toRoute('connexion', ['id' => $user->getId()]);
             }
         }
 
@@ -180,12 +180,12 @@ class UserController extends AbstractActionController {
         $user = $this->authService->getIdentity();
         if(!$user) {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
         if($level_of_access < $user->getRole())
         {
             $this->flashMessenger()->addErrorMessage("Vous n'avez pas accès à cette page");
-            $this->redirect()->toRoute('connexion');
+            $this->redirect()->toRoute('home');
         }
     }
 
