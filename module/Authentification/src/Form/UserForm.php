@@ -32,7 +32,7 @@ class UserForm extends Form {
     /**
      * Constructor.     
      */
-    public function __construct($scenario = 'create', $entityManager = null, $user = null) {
+    public function __construct($scenario = 'create', $entityManager = null, $user = null, $roles = []) {
         // Define form name
         parent::__construct('user-form');
 
@@ -44,14 +44,14 @@ class UserForm extends Form {
         $this->entityManager = $entityManager;
         $this->user = $user;
 
-        $this->addElements();
+        $this->addElements($roles);
         $this->addInputFilter();
     }
 
     /**
      * This method adds elements to form (input fields and submit button).
      */
-    protected function addElements() {
+    protected function addElements($roles) {
         
         $this->add([
             'type' => 'csrf',
@@ -117,7 +117,7 @@ class UserForm extends Form {
             'name' => 'select_role',
             'options' => [
                     'label' => 'Select role',
-                    'value_options' => array( '2' => 'auteur', '3' => 'abonné' )
+                    'value_options' => $roles
                 ],
         ));
 
