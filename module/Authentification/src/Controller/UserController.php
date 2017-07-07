@@ -141,7 +141,7 @@ class UserController extends AbstractActionController {
 
                 // Redirect to "view" page
                 $this->flashMessenger()->addSuccessMessage('Inscription effectuée');
-                return $this->redirect()->toRoute('view.users', ['id' => $user->getId()]);
+                return $this->redirect()->toRoute('connexion', ['id' => $user->getId()]);
             }
         }
 
