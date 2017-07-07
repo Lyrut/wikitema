@@ -268,6 +268,7 @@ class ArticleController extends AbstractActionController {
 
         $articles = $this->entityManager->getRepository(Article::class)
                 ->getArticlesByUser($user);
+        $commentaires = [];
         
         foreach($articles as $article)
         {
@@ -281,7 +282,6 @@ class ArticleController extends AbstractActionController {
             $theme = $this->entityManager->getRepository(Theme::class)->find($idThemeArticle);
             $article->setTheme($theme);
 
-            $commentaires = [];
             $commentaires[$article->getId()] = $this->entityManager->getRepository(Commentaire::class)
                     ->getAllCommentairesByArticle($article->getId());
         }
