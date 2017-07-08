@@ -18,9 +18,9 @@ return [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/article',
+                    'route'    => '/',
                     'defaults' => [
-                        'controller' => Controller\ArticleController::class,
+                        'controller' => Controller\IndexController::class,
                         'action'     => 'index',
                     ],
                 ],
