@@ -13,6 +13,7 @@ $form->get('text')->setAttributes([
     ]);
 
 $form->get('submit')->setAttributes([
+    'value' =>'Modifier',
     'class'=>'uk-button uk-button-default'
     ]);
 
@@ -23,7 +24,7 @@ $form->prepare();
     <div class="col-md-6">
         <?= $this->form()->openTag($form); ?>
             <fieldset class="uk-fieldset">
-                <legend class="uk-legend">Ajout d'un nouvel article</legend>
+                <legend class="uk-legend">Modification d'un nouvel article</legend>
 
                 <?= $this->formElement($form->get('csrf')); ?>
 
